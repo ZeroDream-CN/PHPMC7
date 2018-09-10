@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{Option:SiteName} - {Option:Description}</title>
+        <meta name="keywords" content="&lt;block name=&#39;keywords&#39;&gt;">
+        <meta name="description" content="&lt;block name=&#39;description&#39;&gt;">
+        <link rel="shortcut icon" href="{CONTENTDIR}/{Option:Theme}/assets/favicon.ico">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/animate.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/style.min.css" rel="stylesheet">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/bootstrap.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.metisMenu.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.slimscroll.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/layer.min.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.css" id="layui_layer_skinlayercss" style="">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/hplus.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/contabs.min.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.ext.css" id="layui_layer_skinlayerextcss" style="">
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/style.css" id="layui_layer_skinmoonstylecss" style=""></head>
+    <body class="fixed-sidebar full-height-layout gray-bg">
+		<div class="messagebg" id="messagebg" style="display: none;">
+			<div class="messagebox">
+				<table>
+					<tr>
+						<td>
+							<h2>提示信息</h2>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="msgcontent">
+								Undefined
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var isopenmsgbox = false;
+			function showmsg(text) {
+				$("#messagebg").fadeIn(300);
+				$("#msgcontent").html(text);
+				isopenmsgbox = true;
+			}
+			$("#messagebg").click(function (){
+				if(isopenmsgbox) {
+					$("#messagebg").fadeOut(300);
+					isopenmsgbox = false;
+				}
+			});
+			function progressshow(text) {
+				$("#messagebg").fadeIn(300);
+				$("#msgcontent").text(text);
+			}
+			function progressunshow() {
+				$("#messagebg").fadeOut(300);
+			}
+		</script>
+        <div id="wrapper">
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                <div class="nav-close">
+                    <i class="fa fa-times-circle"></i>
+                </div>
+                <div class="slimScrollDiv" style="position: relative; width: auto; height: 100%;">
+                    <div class="sidebar-collapse" style="width: auto; height: 100%;">
+                        <ul class="nav" id="side-menu">
+                            <li class="nav-header">
+								<img src="https://www.gravatar.com/avatar/{AVATAR_HASH}?s=160" id="miniheadimg" style='display: none;width: 48px;height: 48px;border-radius: 24px;margin-right: 16px;margin-left: 8px;margin-top: 8px;margin-bottom: 8px;'>
+                                <div class="dropdown profile-element">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                        <span class="clear">
+                                            <table>
+												<tr>
+													<td>
+														<img src="https://www.gravatar.com/avatar/{AVATAR_HASH}?s=160" id="headimg" style="width: 48px; height: 48px; border-radius: 24px; margin-right: 16px; display: inline;">
+													</td>
+													<td>
+														<span class="block m-t-xs">
+															<strong class="font-bold">{USERNAME}</strong>
+														</span>
+														<span class="text-muted text-xs block">PHPMC <i class="text-success">7</i></span>
+													</td>
+												</tr>
+											</table>
+										</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="?page=home" data-index="0">
+                                    <i class="fa fa-home"></i>
+                                    <span class="nav-label">主页</span>
+								</a>
+                            </li>
+                            <!--<li class="">
+                                <a href="#">
+                                    <i class="fa fa-server"></i>
+                                    <span class="nav-label">服务器管理</span>
+                                    <span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                                    
+                                </ul>
+                            </li>-->
+							<li>
+								<a class="J_menuItem" href="?page=console" data-index="1">
+									<i class="fa fa-terminal"></i>
+									<span>服务器控制台</span>
+								</a>
+							</li>
+							<li>
+								<a class="J_menuItem" href="?page=server-list" data-index="2">
+									<i class="fa fa-server"></i>
+									<span>服务器管理</span>
+								</a>
+							</li>
+							<li>
+								<a class="J_menuItem" href="?page=daemon-list" data-index="3">
+									<i class="fa fa-cube"></i>
+									<span>Daemon 管理</span>
+								</a>
+							</li>
+							<li>
+                                <a class="J_menuItem" href="?page=user-list" data-index="4">
+                                    <i class="fa fa-user"></i>
+                                    <span class="nav-label">用户管理</span>
+								</a>
+                            </li>
+							<li>
+                                <a class="J_menuItem" href="?page=setting" data-index="5">
+                                    <i class="fa fa-cog"></i>
+                                    <span class="nav-label">PHPMC 7 设置</span>
+								</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 959px;"></div>
+                    <div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.9; z-index: 90; right: 1px;"></div>
+                </div>
+            </nav>
+            <div id="page-wrapper" class="gray-bg dashbard-1">
+                <div class="row content-tabs">
+                    <button class="roll-nav roll-left J_tabLeft">
+                        <i class="fa fa-backward"></i>
+                    </button>
+                    <nav class="page-tabs J_menuTabs">
+                        <div class="page-tabs-content">
+                            <a href="javascript:;" class="active J_menuTab" data-id="?page=home">首页</a></div>
+                    </nav>
+                    <button class="roll-nav roll-right J_tabRight">
+                        <i class="fa fa-forward"></i>
+                    </button>
+                    <div class="btn-group roll-nav roll-right">
+                        <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作</button>
+                        <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                            <li class="J_tabShowActive">
+                                <a>定位当前选项卡</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li class="J_tabCloseAll">
+                                <a>关闭全部选项卡</a>
+                            </li>
+                            <li class="J_tabCloseOther">
+                                <a>关闭其他选项卡</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="?action=logout" class="roll-nav roll-right J_tabExit">
+                        <i class="fa fa fa-sign-out"></i>退出</a>
+                </div>
+                <div class="row J_mainContent" id="content-main">
+                    <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="?page=home" frameborder="0" data-id="?page=home" seamless=""></iframe>
+                </div>
+                <div class="footer">
+                    <div class="pull-right">© 2018
+                        <a href="https://www.phpmc.cn/" target="_blank">PHPMC 提供技术支持</a></div>
+                </div>
+            </div>
+        </div>
+		<script type="text/javascript">
+			setInterval(function() {
+				if($("body").hasClass("mini-navbar")) {
+					$("#miniheadimg").fadeIn(1000);
+					$("#headimg").fadeOut(1000);
+				}
+				if(document.body.clientWidth > 768) {
+					$("body").removeClass("mini-navbar");
+					$("#miniheadimg").fadeOut(1000);
+					$("#headimg").fadeIn(1000);
+				}
+			}, 500);
+		</script>
+    </body>
+
+</html>

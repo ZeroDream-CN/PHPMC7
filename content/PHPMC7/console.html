@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{Option:SiteName} - {Option:Description}</title>
+        <meta name="keywords" content="&lt;block name=&#39;keywords&#39;&gt;">
+        <meta name="description" content="&lt;block name=&#39;description&#39;&gt;">
+        <link rel="shortcut icon" href="{CONTENTDIR}/{Option:Theme}/assets/favicon.ico">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/animate.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/style.min.css" rel="stylesheet">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/bootstrap.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.metisMenu.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.slimscroll.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/layer.min.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.css" id="layui_layer_skinlayercss">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/hplus.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/contabs.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/echarts.common.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/echartsOne.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.ext.css" id="layui_layer_skinlayerextcss">
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/style.css" id="layui_layer_skinmoonstylecss">
+        <script type="text/javascript" src="{CONTENTDIR}/{Option:Theme}/assets/js/console.js"></script>
+    </head>
+    
+    <body class="fixed-sidebar full-height-layout gray-bg">
+        <div class="wrapper wrapper-content">
+            <div class="row">
+				<div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>服务器控制台</h5>
+						</div>
+                        <div class="ibox-content" style="">
+							<div id="debug" class="console" style="overflow: unset;overflow-y: scroll;"></div>
+							<input id="command" style="background: none;top: 0px;outline: none;" placeholder="在此处输入命令，Enter 提交">
+						</div>
+					</div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>服务器控制台</h5></div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">
+                                <span class="text-info" id="online"></span> /
+                                <span class="text-danger" id="max"></span></h1>
+                            <small>在线玩家 / 最大在线</small>
+							<br>
+							<span>当前延迟：<span id="ping">Pinging ...</span></span>
+							<br><br>
+							<button class="btn btn-primary" id="btn1" onclick="startServer()"><i class="fa fa-play"></i> 开启</button>
+							<div class="s8px"></div>
+							<button class="btn btn-danger" id="btn2" onclick="stopServer()"><i class="fa fa-stop"></i> 关闭</button>
+							<div class="s8px"></div>
+							<button class="btn btn-warning" id="btn3" onclick="restartServer()"><i class="fa fa-refresh"></i> 重启</button>
+							<p style="margin-top: 8px;">
+								<input type="checkbox" checked="true" id="autoflush"> <span style="position: relative;top: -2px;">保持输出滚动</span></input>
+							</p>
+							<p>游戏地址：<code id="gamehost"></code></p>
+							<p>FTP 账号：<code id="ftpuser"></code></p>
+							<p>FTP 密码：<code id="ftppass"></code></p>
+						</div>
+                    </div>
+                </div>
+				<div class="col-lg-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>选择服务器</h5>
+						</div>
+                        <div class="ibox-content">
+							{{ PHPMC::Server()->getServerList() }}
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>{Option:SiteName} — 登陆</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="robots" content="noindex" />
+		<link href="content/{Option:Theme}/css/sakura.css" type="text/css" rel="stylesheet" />
+		<link rel="shortcut icon" href="content/{Option:Theme}/assets/favicon.ico" type="image/x-icon">
+		<script type="text/javascript" src="content/{Option:Theme}/assets/js/jquery.min.js"></script>
+	</head>
+	<body class="login-body">
+		<div class="messagebg" id="messagebg" style="display: none;">
+			<div class="messagebox">
+				<table>
+					<tr>
+						<td>
+							<h2>提示信息</h2>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div id="msgcontent"></div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var isopenmsgbox = false;
+			function showmsg(text) {
+				$("#messagebg").fadeIn(300);
+				$("#msgcontent").html(text);
+				isopenmsgbox = true;
+			}
+			$("#messagebg").click(function (){
+				if(isopenmsgbox) {
+					$("#messagebg").fadeOut(300);
+					isopenmsgbox = false;
+				}
+			});
+			function progressshow(text) {
+				$("#messagebg").fadeIn(300);
+				$("#msgcontent").text(text);
+			}
+			function progressunshow() {
+				$("#messagebg").fadeOut(300);
+			}
+			function login() {
+				var urname = document.getElementById("login_username").value;
+				var passwd = document.getElementById("login_passwd").value;
+				htmlobj = $.ajax({
+					url: "?action=login",
+					type: 'POST',
+					async: true,
+					error: function() {
+						showmsg(htmlobj.responseText);
+					},
+					success: function() {
+						window.location = "/";
+						console.log(htmlobj.responseText);
+					},
+					data: {
+						username: urname,
+						password: passwd
+					}
+				});
+			};
+		</script>
+		<div class="content">
+			<div class="top-logo">
+				<img src="content/{Option:Theme}/images/PHPMC7-Logo.png" />
+			</div>
+			<div class="login-box">
+				<div class="box-form">
+					<div class="login-title">
+						<span>PHPMC 7 Login</span>
+					</div>
+					<div class="login-form">
+						<table>
+							<tr>
+								<td class="label">
+									<span>账号</span>
+								</td>
+								<td>
+									<input id="login_username" placeholder="用户名" type="text" name="username" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span>密码</span>
+								</td>
+								<td>
+									<input id="login_passwd" placeholder="密码" type="password" name="password" />
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>
+									<span class="pre-text">
+										<a href="?page=findpass">忘记密码</a>
+									</span>
+								</td>
+								<td>
+									<div class="btn-content">
+										<button class="btn-login" onclick="login()">Log In</button>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="right-tips">
+					<div class="tips-content">
+						<p>欢迎登录 <b>{Option:SiteName}</b> {Option:Description}</p>
+						<p>本平台由 Akkariin 开发。</p>
+						<p>作者QQ：204034&nbsp;&nbsp;邮箱：akkariin@akkariin.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

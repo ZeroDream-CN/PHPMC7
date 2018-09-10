@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{Option:SiteName} - {Option:Description}</title>
+        <meta name="keywords" content="&lt;block name=&#39;keywords&#39;&gt;">
+        <meta name="description" content="&lt;block name=&#39;description&#39;&gt;">
+        <link rel="shortcut icon" href="{CONTENTDIR}/{Option:Theme}/assets/favicon.ico">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/animate.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/style.min.css" rel="stylesheet">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/bootstrap.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.metisMenu.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.slimscroll.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/layer.min.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.css" id="layui_layer_skinlayercss">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/hplus.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/contabs.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/echarts.common.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/echartsOne.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.ext.css" id="layui_layer_skinlayerextcss">
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/style.css" id="layui_layer_skinmoonstylecss">
+        <script type="text/javascript" src="{CONTENTDIR}/{Option:Theme}/assets/js/console.js"></script>
+    </head>
+    
+    <body class="fixed-sidebar full-height-layout gray-bg">
+        <div class="wrapper wrapper-content">
+            <div class="row">
+				<div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>PHPMC 7 设置</h5>
+						</div>
+                        <div class="ibox-content addfrp">
+							<h4>感谢您使用 PHPMC <span class="text-success">7</span></h4>
+							<p>如果您在使用中遇到任何问题，请与我取得联系。</p>
+							<p>QQ：204034 | Email：akkariin@akkariin.com</p>
+							<hr>
+							<p>站点名称</p>
+							<input type="text" class="form-control" id="SiteName" value="{Option:SiteName}" />
+							<p>站点简介</p>
+							<input type="text" class="form-control" id="Description" value="{Option:Description}" />
+							<p>系统主题</p>
+							<input type="text" class="form-control" id="Theme" value="{Option:Theme}" />
+							<div class="text-right" style="margin-top: 16px;">
+								<button class="btn btn-primary" onclick="saveConfig()">保存设置</button>
+							</div>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+		<script type="text/javascript">
+			var selected;
+			function saveConfig() {
+				var htmlobj = $.ajax({
+					url: "?action=saveconfig",
+					async:true,
+					timeout:5000,
+					data: {
+						SiteName: $("#SiteName").val(),
+						Description: $("#Description").val(),
+						Theme: $("#Theme").val()
+					},
+					error: function() {
+						window.parent.frames.showmsg(htmlobj.responseText);
+					},
+					success: function() {
+						console.log(htmlobj.responseText);
+						window.parent.frames.showmsg(htmlobj.responseText);
+						location = '?page=setting'
+						return;
+					}
+				});
+			}
+		</script>
+    </body>
+
+</html>

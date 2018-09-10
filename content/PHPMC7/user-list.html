@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{Option:SiteName} - {Option:Description}</title>
+        <meta name="keywords" content="&lt;block name=&#39;keywords&#39;&gt;">
+        <meta name="description" content="&lt;block name=&#39;description&#39;&gt;">
+        <link rel="shortcut icon" href="{CONTENTDIR}/{Option:Theme}/assets/favicon.ico">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/animate.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/style.min.css" rel="stylesheet">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/bootstrap.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.metisMenu.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.slimscroll.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/layer.min.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.css" id="layui_layer_skinlayercss">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/hplus.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/contabs.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/echarts.common.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/echartsOne.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.ext.css" id="layui_layer_skinlayerextcss">
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/style.css" id="layui_layer_skinmoonstylecss">
+        <script type="text/javascript" src="{CONTENTDIR}/{Option:Theme}/assets/js/console.js"></script>
+    </head>
+    
+    <body class="fixed-sidebar full-height-layout gray-bg">
+        <div class="wrapper wrapper-content">
+            <div class="row">
+				<div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>用户列表</h5>
+						</div>
+                        <div class="ibox-content" style="">
+							{{ PHPMC::User()->getUserListAdmin() }}
+						</div>
+					</div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>修改用户</h5></div>
+                        <div class="ibox-content addfrp">
+                            <p>从上面选择一个用户来修改设置</p>
+							<div id="changeuser" style="display: none;">
+								<p>请注意，当用户还拥有服务器时无法删除。</p>
+								<p>用户名</p>
+								<input type="text" id="modify_username" class="form-control" />
+								<p>用户密码 (留空不修改)</p>
+								<input type="password" id="modify_password" class="form-control" />
+								<p>用户邮箱</p>
+								<input type="text" id="modify_email" class="form-control" />
+								<p>用户权限</p>
+								<input type="text" id="modify_permission" class="form-control" />
+								<div class="text-right" style="margin-top: 16px;">
+									<button class="btn btn-danger" onclick="deleteUser()">删除用户</button>
+									<button class="btn btn-primary" onclick="updateUser()">保存修改</button>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+				<div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>添加用户</h5>
+						</div>
+                        <div class="ibox-content addfrp">
+							<p>用户名</p>
+							<input type="text" id="username" class="form-control" />
+							<p>用户密码</p>
+							<input type="password" id="password" class="form-control" />
+							<p>用户邮箱</p>
+							<input type="text" id="email" class="form-control" />
+							<p>用户权限</p>
+							<input type="text" id="permission" class="form-control" />
+							<div class="text-right" style="margin-top: 16px;">
+								<button class="btn btn-primary" onclick="createUser()">添加用户</button>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<script type="text/javascript">
+			var selected;
+			function selectUser(id, element) {
+				$(".server-hover").attr("style", "");
+				element.style.border = "1px solid rgba(255,255,255,0.3)";
+				var htmlobj = $.ajax({
+					url:"?action=getuserinfo&id=" + id,
+					async:true,
+					timeout:5000,
+					error: function() {
+						window.parent.frames.showmsg(htmlobj.responseText);
+					},
+					success: function() {
+						var result = htmlobj.responseText;
+						var obj = JSON.parse(result);
+						console.log(obj);
+						$("#modify_username").val(obj.username);
+						$("#modify_email").val(obj.email);
+						$("#modify_permission").val(obj.permission);
+						$("#changeuser").fadeIn();
+						selected = id;
+						return;
+					}
+				});
+			};
+			function createUser() {
+				var htmlobj = $.ajax({
+					url: "?",
+					async:true,
+					timeout:5000,
+					data: {
+						action: "createuser",
+						username: $("#username").val(),
+						password: $("#password").val(),
+						email: $("#email").val(),
+						permission: $("#permission").val()
+					},
+					error: function() {
+						window.parent.frames.showmsg(htmlobj.responseText);
+					},
+					success: function() {
+						console.log(htmlobj.responseText);
+						window.parent.frames.showmsg(htmlobj.responseText);
+						location = '?page=user-list'
+						return;
+					}
+				});
+			}
+			function updateUser() {
+				var htmlobj = $.ajax({
+					url: "?",
+					async:true,
+					timeout:5000,
+					data: {
+						action: "updateuser",
+						id: selected,
+						username: $("#modify_username").val(),
+						password: $("#modify_password").val(),
+						email: $("#modify_email").val(),
+						permission: $("#modify_permission").val()
+					},
+					error: function() {
+						window.parent.frames.showmsg(htmlobj.responseText);
+					},
+					success: function() {
+						console.log(htmlobj.responseText);
+						window.parent.frames.showmsg(htmlobj.responseText);
+						location = '?page=user-list'
+						return;
+					}
+				});
+			}
+			function deleteUser() {
+				if(confirm("您确定要删除此用户吗？此操作不可恢复！")) {
+					var htmlobj = $.ajax({
+						url: "?",
+						async:true,
+						timeout:5000,
+						data: {
+							action: "deleteuser",
+							id: selected
+						},
+						error: function() {
+							window.parent.frames.showmsg(htmlobj.responseText);
+						},
+						success: function() {
+							console.log(htmlobj.responseText);
+							window.parent.frames.showmsg(htmlobj.responseText);
+							location = '?page=user-list'
+							return;
+						}
+					});
+				}
+			}
+		</script>
+    </body>
+
+</html>

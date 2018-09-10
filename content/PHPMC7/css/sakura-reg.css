@@ -1,0 +1,236 @@
+/******************************************************/
+/*                                                    */
+/*    Sakura Login Page Css File                      */
+/*                                                    */
+/*    登录界面设计灵感来源于 Cockpit 登录界面         */
+/*                                                    */
+/*    https://blog.kasuganosora.cn/                   */
+/*                                                    */
+/******************************************************/
+body {
+	background: url(../images/bg-plain.jpg) no-repeat 50% 0;
+    background-size: auto;
+    background-color: #101010;
+	font-family: "Open Sans",Helvetica,Arial,sans-serif;
+}
+
+.content {
+	width: 100%;
+}
+
+.content .top-logo img {
+	width: 320px;
+	position: fixed;
+	top: 48px;
+	right: 48px;
+}
+
+.content .login-box {
+	width: 100%;
+	height: 300px;
+	position: fixed;
+	bottom: 13%;
+	left: 0px;
+	background: rgba(255,255,255,0.055);
+}
+
+.content .login-box .box-form {
+	width: 39.5%;
+	margin-left: 78px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.content .login-box .box-form .login-title {
+	color: #FFF;
+	font-family: "Open Sans",Helvetica,Arial,sans-serif;
+	font-size: 18pt;
+    text-transform: uppercase;
+	margin-top: -45px;
+}
+
+.content .login-box .box-form .login-form {
+	width: 100%;
+	border-right: 1px solid rgba(255, 255, 255, 0.3);
+	margin-top: 75px;
+}
+
+.content .login-box .box-form .login-form table {
+	width: 100%;
+}
+
+.content .login-box .box-form .login-form table span {
+	color: #FFF;
+	font-size: 13px;
+	vertical-align: top;
+}
+
+.content .login-box .box-form .login-form table input {
+	display: block;
+    width: 98%;
+    padding: 2px 6px;
+    font-size: 12px;
+    background-color: rgba(0,0,0,0);
+    background-image: none;
+	border: 0px;
+	border-bottom: 1px solid #bababa;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	height: 20px;
+	position: relative;
+	right: 20px;
+	margin-bottom: 10px;
+	outline: none;
+	color: #FFF;
+	font-family: "Consolas";
+}
+
+.content .login-box .box-form .login-form table input:focus {
+	border-bottom: 1px solid #189ad1;
+}
+
+.content .login-box .box-form .login-form table .pre-text {
+	margin-left: 0px;
+}
+
+.content .login-box .box-form .login-form table .label {
+	width: 20%;
+}
+
+.content .login-box .box-form .login-form table .btn-content {
+	display: block;
+    width: 98%;
+    padding: 2px 6px;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	height: 20px;
+	position: relative;
+	right: 20px;
+	margin-bottom: 10px;
+}
+
+.content .login-box .box-form .login-form table .btn-login {
+	float: right;
+	padding: 7px;
+	margin-right: -8px;
+	width: 26%;
+	font-weight: 800;
+	background-color: #189ad1;
+    background-image: -webkit-linear-gradient(top,#1cace8 0,#1998cc 100%);
+    background-image: linear-gradient(to bottom,#1cace8 0,#1998cc 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff1cace8', endColorstr='#ff1998cc', GradientType=0);
+    border-color: #267da1;
+	border: 1px;
+	color: #FFF;
+	user-select: none;
+	cursor: pointer;
+	margin-bottom: 16px;
+	font-family: "Consolas";
+	height: 32px;
+	margin-top: 8px;
+	transition-duration: 1s;
+}
+
+.content .login-box .box-form .login-form table .btn-login:hover {
+	background-color:#189ad1;
+	background-image:none;
+	border-color:#267da1;
+	color:#fff;
+	transition-duration: 1s;
+}
+
+.content .login-box .right-tips {
+	display: inline-block;
+}
+
+.content .login-box .right-tips .tips-content {
+	margin-left: 35px;
+	color: #FFF;
+	margin-top: 64px;
+	font-size: 13px;
+}
+
+.content .login-box .right-tips .tips-content p {
+	-webkit-margin-before: 0.5em ! important;
+    -webkit-margin-after: 0.5em ! important;
+}
+
+::selection {
+	background: rgba(255,134,184,0.8);
+	color: #FFF;
+}
+
+::-moz-selection {
+	background: rgba(255,134,184,0.8);
+	color: #FFF;
+}
+
+::-webkit-selection {
+	background: rgba(255,134,184,0.8);
+	color: #FFF;
+}
+
+@media screen and (max-width: 1024px) {
+	.content .login-box {
+		height: 410px;
+		bottom: 0%;
+		top: 30%;
+	}
+	.content .login-box .box-form {
+		width: 90%;
+		display: block;
+		margin-left: 6%;
+	}
+	.content .login-box .box-form .login-form {
+		border-right: 0px;
+	}
+	.content .login-box .box-form .login-form table .label {
+		width: 30%;
+	}
+	.content .top-logo img {
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.content .login-box .box-form .login-form table .btn-login {
+		width: 50%;
+	}
+}
+
+.messagebg {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	z-index: 99999999999;
+	background: rgba(0,0,0,0.75);
+}
+
+.messagebg .messagebox {
+	width: 512px;
+	margin: auto;
+	position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+	background: #FFF;
+	box-shadow: 0px 0px 20px #000;
+	border-radius: 8px;
+	padding-bottom: 20px;
+}
+
+.messagebg .messagebox table {
+	width: 90%;
+	margin: auto;
+}
+
+a {
+	color: #189ad1;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #267da1;
+}

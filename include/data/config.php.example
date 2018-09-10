@@ -1,0 +1,30 @@
+<?php
+class Config {
+	
+	public $conf = Array(
+		'MySQL' => Array(
+			'host' => 'localhost',
+			'port' => 3306,
+			'user' => 'root',
+			'pass' => 'root',
+			'name' => 'phpmc7'
+		)
+	);
+	
+	public function __call($method, $args) {
+		if(isset($this->conf[$method])) {
+			return $this->conf[$method];
+		} else {
+			return "";
+		}
+	}
+	
+	public static function __callStatic($method, $args) {
+		$Config = new Config();
+		if(isset($Config->conf[$method])) {
+			return $Config->conf[$method];
+		} else {
+			return "";
+		}
+	}
+} 

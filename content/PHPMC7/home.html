@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{Option:SiteName} - {Option:Description}</title>
+        <meta name="keywords" content="&lt;block name=&#39;keywords&#39;&gt;">
+        <meta name="description" content="&lt;block name=&#39;description&#39;&gt;">
+        <link rel="shortcut icon" href="{CONTENTDIR}/{Option:Theme}/assets/favicon.ico">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/animate.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/style.min.css" rel="stylesheet">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/bootstrap.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.metisMenu.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.slimscroll.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/layer.min.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.css" id="layui_layer_skinlayercss" style="">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/hplus.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/contabs.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/echarts.common.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/echartsOne.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.ext.css" id="layui_layer_skinlayerextcss" style="">
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/style.css" id="layui_layer_skinmoonstylecss" style=""></head>
+    <body class="fixed-sidebar full-height-layout gray-bg">
+        <div class="wrapper wrapper-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>系统数据统计</h5>
+						</div>
+                        <div class="ibox-content">
+                            <div class="row">
+								<div class="col-sm-3 box-hover">
+									<center>
+										<h1><i class="fa fa-cubes"></i></h1>
+										<h4>Daemon 数量</h4>
+										<p>{Daemon:getCounts}</p>
+									</center>
+								</div>
+								<div class="col-sm-3 box-hover">
+									<center>
+										<h1><i class="fa fa-cubes"></i></h1>
+										<h4>Minecraft 服务器数量</h4>
+										<p>{Server:getCounts}</p>
+									</center>
+								</div>
+								<div class="col-sm-3 box-hover">
+									<center>
+										<h1><i class="fa fa-key"></i></h1>
+										<h4>登录失败次数</h4>
+										<p>{Option:loginFailed}</p>
+									</center>
+								</div>
+								<div class="col-sm-3 box-hover">
+									<center>
+										<h1><i class="fa fa-users"></i></h1>
+										<h4>用户数量</h4>
+										<p>{User:getCounts}</p>
+									</center>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>主页</h5></div>
+                        <div class="ibox-content" id="debug">
+							<p>欢迎使用 PHPMC <span class="text-success">7</span> 管理面板系统</p>
+							<p>您正在使用的 PHPMC 版本为：{System:get_phpmc_version}</p>
+							<p>如果您在使用中遇到任何问题，请与我取得联系，QQ：204034。</p>
+							<p>PHPMC 官方网站：<a href="https://www.phpmc.cn/" target="_blank">https://www.phpmc.cn/</a></p>
+                        </div>
+					</div>
+                </div>
+				<div class="col-lg-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>系统信息</h5>
+						</div>
+                        <div class="ibox-content" id="debug">
+							<p>PHP 版本：{System:get_PHP_Version}</p>
+							<p>PHP 运行方式：{System:get_php_sapi_name}</p>
+							<p>服务器操作系统：{System:get_php_os}</p>
+							<p>HTTP 服务器：{System:get_server_software}</p>
+                        </div>
+					</div>
+                </div>
+            </div>
+        </div>
+		<script type="text/javascript">
+			/*window.onload = function(){
+				getPie('#qxfl');
+				$("#showinfo1").click(function(){
+					getPie(this);
+				});
+			}*/
+		</script>
+    </body>
+
+</html>

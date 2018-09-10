@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{Option:SiteName} - {Option:Description}</title>
+        <meta name="keywords" content="&lt;block name=&#39;keywords&#39;&gt;">
+        <meta name="description" content="&lt;block name=&#39;description&#39;&gt;">
+        <link rel="shortcut icon" href="{CONTENTDIR}/{Option:Theme}/assets/favicon.ico">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/animate.min.css" rel="stylesheet">
+        <link href="{CONTENTDIR}/{Option:Theme}/assets/css/style.min.css" rel="stylesheet">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/bootstrap.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.metisMenu.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/jquery.slimscroll.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/layer.min.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.css" id="layui_layer_skinlayercss">
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/hplus.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/contabs.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/echarts.common.min.js"></script>
+        <script src="{CONTENTDIR}/{Option:Theme}/assets/js/echartsOne.js"></script>
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/layer.ext.css" id="layui_layer_skinlayerextcss">
+        <link rel="stylesheet" href="{CONTENTDIR}/{Option:Theme}/assets/css/style.css" id="layui_layer_skinmoonstylecss">
+        <script type="text/javascript" src="{CONTENTDIR}/{Option:Theme}/assets/js/console.js"></script>
+    </head>
+    
+    <body class="fixed-sidebar full-height-layout gray-bg">
+        <div class="wrapper wrapper-content">
+            <div class="row">
+				<div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Daemon 列表</h5>
+						</div>
+                        <div class="ibox-content" style="">
+							{{ PHPMC::Daemon()->getDaemonListAdmin() }}
+						</div>
+					</div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>修改 Daemon</h5></div>
+                        <div class="ibox-content addfrp">
+                            <p>从上面选择一个 Daemon 来修改设置</p>
+							<div id="changedaemon" style="display: none;">
+								<p>请注意，当 Daemon 中还有服务器时无法删除。</p>
+								<p>Daemon 名称</p>
+								<input type="text" id="modify_name" class="form-control" />
+								<p>AJAX 请求地址</p>
+								<input type="text" id="modify_host" class="form-control" />
+								<p>连接密码</p>
+								<input type="text" id="modify_pass" class="form-control" />
+								<p>域名或 IP 地址</p>
+								<input type="text" id="modify_fqdn" class="form-control" />
+								<p>服务器系统类型</p>
+								<select id="modify_type" class="form-control">
+									<option value="linux" id="Type_linux">Linux x86/x64</option>
+									<option value="windows" id="Type_windows">Windows x86/x64</option>
+								</select>
+								<div class="text-right" style="margin-top: 16px;">
+									<button class="btn btn-danger" onclick="deleteDaemon()">删除 Daemon</button>
+									<button class="btn btn-primary" onclick="updateDaemon()">保存修改</button>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+				<div class="col-lg-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>添加服务器</h5>
+						</div>
+                        <div class="ibox-content addfrp">
+							<p>Daemon 名称</p>
+							<input type="text" id="name" class="form-control" />
+							<p>AJAX 请求地址</p>
+							<input type="text" id="host" class="form-control" />
+							<p>连接密码</p>
+							<input type="text" id="pass" class="form-control" />
+							<p>域名或 IP 地址</p>
+							<input type="text" id="fqdn" class="form-control" />
+							<p>服务器系统类型</p>
+							<select id="type" class="form-control">
+								<option value="linux">Linux x86/x64</option>
+								<option value="windows">Windows x86/x64</option>
+							</select>
+							<div class="text-right" style="margin-top: 16px;">
+								<button class="btn btn-primary" onclick="createDaemon()">添加 Daemon</button>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<script type="text/javascript">
+			var selected;
+			function selectDaemon(id, element) {
+				$(".server-hover").attr("style", "");
+				element.style.border = "1px solid rgba(255,255,255,0.3)";
+				var htmlobj = $.ajax({
+					url:"?action=getdaemoninfo&id=" + id,
+					async:true,
+					timeout:5000,
+					error: function() {
+						window.parent.frames.showmsg(htmlobj.responseText);
+					},
+					success: function() {
+						var result = htmlobj.responseText;
+						var obj = JSON.parse(result);
+						console.log(obj);
+						$("#modify_name").val(obj.name);
+						$("#modify_host").val(obj.host);
+						$("#modify_pass").val(obj.pass);
+						$("#modify_fqdn").val(obj.fqdn);
+						$("#Type_" + obj.type).attr("selected", "selected");
+						$("#changedaemon").fadeIn();
+						selected = id;
+						return;
+					}
+				});
+			};
+			function createDaemon() {
+				var htmlobj = $.ajax({
+					url: "?",
+					async:true,
+					timeout:5000,
+					data: {
+						action: "createdaemon",
+						name: $("#name").val(),
+						host: $("#host").val(),
+						pass: $("#pass").val(),
+						fqdn: $("#fqdn").val(),
+						type: $("#type").val()
+					},
+					error: function() {
+						window.parent.frames.showmsg(htmlobj.responseText);
+					},
+					success: function() {
+						console.log(htmlobj.responseText);
+						window.parent.frames.showmsg(htmlobj.responseText);
+						location = '?page=daemon-list'
+						return;
+					}
+				});
+			}
+			function updateDaemon() {
+				var htmlobj = $.ajax({
+					url: "?",
+					async:true,
+					timeout:5000,
+					data: {
+						action: "updatedaemon",
+						id: selected,
+						name: $("#modify_name").val(),
+						host: $("#modify_host").val(),
+						pass: $("#modify_pass").val(),
+						fqdn: $("#modify_fqdn").val(),
+						type: $("#modify_type").val()
+					},
+					error: function() {
+						window.parent.frames.showmsg(htmlobj.responseText);
+					},
+					success: function() {
+						console.log(htmlobj.responseText);
+						window.parent.frames.showmsg(htmlobj.responseText);
+						location = '?page=daemon-list'
+						return;
+					}
+				});
+			}
+			function deleteDaemon() {
+				if(confirm("您确定要删除此 Daemon 吗？此操作不可恢复！")) {
+					var htmlobj = $.ajax({
+						url: "?",
+						async:true,
+						timeout:5000,
+						data: {
+							action: "deletedaemon",
+							id: selected
+						},
+						error: function() {
+							window.parent.frames.showmsg(htmlobj.responseText);
+						},
+						success: function() {
+							console.log(htmlobj.responseText);
+							window.parent.frames.showmsg(htmlobj.responseText);
+							location = '?page=daemon-list'
+							return;
+						}
+					});
+				}
+			}
+		</script>
+    </body>
+
+</html>

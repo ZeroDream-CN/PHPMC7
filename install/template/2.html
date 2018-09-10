@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PHPMC 7 — 安装向导</title>
+        <link rel="shortcut icon" href="../content/PHPMC7/assets/favicon.ico">
+        <link href="../content/PHPMC7/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../content/PHPMC7/assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="../content/PHPMC7/assets/css/style.min.css" rel="stylesheet">
+        <script src="../content/PHPMC7/assets/js/jquery.min.js"></script>
+        <script src="../content/PHPMC7/assets/js/bootstrap.min.js"></script>
+        <script src="../content/PHPMC7/assets/js/layer.min.js"></script>
+        <link rel="stylesheet" href="../content/PHPMC7/assets/css/layer.css" id="layui_layer_skinlayercss" style="">
+        <link rel="stylesheet" href="../content/PHPMC7/assets/css/layer.ext.css" id="layui_layer_skinlayerextcss" style="">
+        <link rel="stylesheet" href="../content/PHPMC7/assets/css/style.css" id="layui_layer_skinmoonstylecss" style=""></head>
+    <body class="gray-bg" style="color:#FFF;">
+        <div class="container">
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-8 addfrp">
+					<div class="ibox float-e-margins" style="margin-bottom: 0px">
+						<div class="ibox-content">
+							<form method="post" action="?step=3">
+								<h1>PHPMC <span class="text-success">7</span> <small>安装向导</small></h1>
+								<p>欢迎使用 PHPMC 7，这是一款 Minecraft 服务器管理系统，拥有跨平台、分布式的特性，支持管理 BungeeCord 群组服务器等。</p>
+								<p>本软件由 Akkariin 开发，GNU General Public License v3 开源协议。</p>
+								<p>PHPMC 7 官方网站：<a href="https://www.phpmc.cn/" target="_blank">https://www.phpmc.cn/</a></p>
+								<hr>
+								<p>数据库地址</p>
+								<input type="text" name="db_host" value="localhost" class="form-control">
+								<p>数据库端口</p>
+								<input type="text" name="db_port" value="3306" class="form-control">
+								<p>数据库账号</p>
+								<input type="text" name="db_user" value="root" class="form-control">
+								<p>数据库密码</p>
+								<input type="text" name="db_pass" value="root" class="form-control">
+								<p>数据库名称</p>
+								<input type="text" name="db_name" value="phpmc7" class="form-control">
+								<hr>
+								<p>站点名称</p>
+								<input type="text" name="SiteName" value="PHPMC 7" class="form-control">
+								<p>站点简介</p>
+								<input type="text" name="Description" value="Minecraft 服务器管理系统" class="form-control">
+								<hr>
+								<p>管理员账号</p>
+								<input type="text" name="username" value="admin" class="form-control">
+								<p>管理员邮箱</p>
+								<input type="text" name="email" value="admin@example.com" class="form-control">
+								<p>管理员密码</p>
+								<input type="password" name="password" value="" class="form-control">
+								<p>重复一次</p>
+								<input type="password" name="password2" value="" class="form-control">
+								<hr>
+								<div class="text-center">
+									<br>
+									<p>请确认信息准确无误后再执行安装</p>
+									<a href="?step=2">
+										<button class="btn btn-success"><i class="fa fa-send"></i> 开始安装</button>
+									</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
