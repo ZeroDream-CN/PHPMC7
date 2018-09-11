@@ -33,4 +33,4 @@ PHPMC 7 支持权限细分，每个操作都可以设定权限。
 
 。。。懒得写了。。Markdown真麻烦。。。
 
-看这里吧：http://mcbbs.net/thread-819800-1-1.html
+看这里吧：http://www.mcbbs.net/thread-819800-1-1.html
