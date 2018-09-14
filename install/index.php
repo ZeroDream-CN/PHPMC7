@@ -1,17 +1,11 @@
 <?php
-if(file_exists("install.lock")) {
-	echo file_get_contents("template/locked.html");
-	exit;
-}
-if($_GET['step'] == '') {
-	echo file_get_contents("template/1.html");
-	exit;
-}
-if($_GET['step'] == '2') {
-	echo file_get_contents("template/2.html");
-	exit;
-}
-if($_GET['step'] == '3') {
+/**
+ *
+ * PHPMC 7 Install
+ *
+ */
+error_reporting(E_ALL);
+function install() {
 	$db_host = $_POST['db_host'];
 	$db_port = $_POST['db_port'];
 	$db_user = $_POST['db_user'];
@@ -145,6 +139,34 @@ class Config {
 	}
 }');
 	@file_put_contents("install.lock", "");
-	echo file_get_contents("template/3.html");
+}
+
+if(file_exists("install.lock")) {
+	echo @file_get_contents("template/locked.html");
+	exit;
+}
+
+if(isset($_GET['step'])) {
+	switch($_GET['step']) {
+		case '1':
+			echo @file_get_contents("template/1.html");
+			break;
+		case '2':
+			echo @file_get_contents("template/2.html");
+			break;
+		case '3':
+			install();
+			$type = $_SERVER['SERVER_PORT'] == 443 ? "https://" : "http://";
+			$self = str_replace("index.php", "?installed=true", str_replace("install/", "", $_SERVER['PHP_SELF']));
+			$connect = "{$type}{$_SERVER['HTTP_HOST']}{$self}";
+			echo str_replace("{HOME}", $connect, @file_get_contents("template/3.html"));
+			break;
+		default:
+			echo @file_get_contents("template/1.html");
+			break;
+	}
+	exit;
+} else {
+	echo @file_get_contents("template/1.html");
 	exit;
 }
