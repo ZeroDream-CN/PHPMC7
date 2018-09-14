@@ -113,6 +113,7 @@
 		<script type="text/javascript">
 			var selected;
 			function selectServer(id, element) {
+				window.parent.frames.progressshow("请稍后，正在加载...");
 				$(".server-hover").attr("style", "");
 				element.style.border = "1px solid rgba(255,255,255,0.3)";
 				var htmlobj = $.ajax({
@@ -136,6 +137,7 @@
 						$("#User_" + obj.owner).attr("selected", "selected");
 						$("#changeserver").fadeIn();
 						selected = id;
+						window.parent.frames.progressunshow();
 						return;
 					}
 				});

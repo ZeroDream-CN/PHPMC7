@@ -164,6 +164,10 @@ class Loader {
 					PHPMC::Permission()->checkSession("action:" . $_GET['action']);
 					PHPMC::Event()->deleteUserEvent($_GET);
 					break;
+				case 'update':
+					PHPMC::Permission()->checkSession("action:" . $_GET['action']);
+					PHPMC::Event()->updateEvent();
+					break;
 				default:
 					echo $this::loadPage("404.html", ROOT . "/content/" . $Option->getOption("Theme") . "/error/");
 			}

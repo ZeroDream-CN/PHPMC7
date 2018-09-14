@@ -1,5 +1,5 @@
 <?php
-define("PHPMC_VERSION", "7.2.1926-Beta"); // Don't Change This!
+define("PHPMC_VERSION", "7.3.1709"); // Don't Change This!
 include(ROOT . "/include/core/PHPMC/Event.php");
 include(ROOT . "/include/core/PHPMC/User.php");
 include(ROOT . "/include/core/PHPMC/Utils.php");
@@ -11,6 +11,7 @@ include(ROOT . "/include/core/PHPMC/System.php");
 include(ROOT . "/include/core/PHPMC/Http.php");
 include(ROOT . "/include/core/PHPMC/Option.php");
 include(ROOT . "/include/core/PHPMC/Permission.php");
+include(ROOT . "/include/core/PHPMC/Update.php");
 class PHPMC {
 	public static function Event() {
 		return new Event();
@@ -42,6 +43,10 @@ class PHPMC {
 	
 	public static function Permission() {
 		return new Permission();
+	}
+	
+	public static function Update() {
+		return new Update();
 	}
 	
 	public static function Error() {

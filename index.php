@@ -1,5 +1,5 @@
 <?php
-set_time_limit(10);
+set_time_limit(60);
 error_reporting(0);
 $pathinfo = pathinfo($_SERVER['PHP_SELF']);
 $path = str_replace("/" . $pathinfo['basename'], "", $_SERVER['PHP_SELF']);

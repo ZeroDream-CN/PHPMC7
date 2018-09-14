@@ -436,4 +436,10 @@ class Event {
 		echo "系统设置更改成功！";
 		exit;
 	}
+	
+	public function updateEvent() {
+		if(PHPMC::Update()->checkUpdate()) {
+			PHPMC::Update()->updateExecute();
+		}
+	}
 }
