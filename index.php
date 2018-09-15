@@ -10,6 +10,8 @@ if(!file_exists(ROOT . "/include/data/config.php") && !isset($_GET['installed'])
 	exit;
 }
 include(ROOT . "/include/loader.php");
+$Plugin = new Plugin();
 $Loader = new Loader();
+$Plugin->load("plugins");
 $Loader->router();
 $Loader->frame();

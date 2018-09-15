@@ -1,5 +1,8 @@
 <?php
-define("PHPMC_VERSION", "7.3.2105"); // Don't Change This!
+// PHPMC 7 Version define
+// Don't change this, because it will interfere your update.
+define("PHPMC_VERSION", "7.3.3156");
+
 include(ROOT . "/include/core/PHPMC/Event.php");
 include(ROOT . "/include/core/PHPMC/User.php");
 include(ROOT . "/include/core/PHPMC/Utils.php");
@@ -13,7 +16,10 @@ include(ROOT . "/include/core/PHPMC/Option.php");
 include(ROOT . "/include/core/PHPMC/Permission.php");
 include(ROOT . "/include/core/PHPMC/Update.php");
 include(ROOT . "/include/core/PHPMC/Csrf.php");
+include(ROOT . "/include/core/PHPMC/Plugin.php");
+
 class PHPMC {
+	
 	public static function Event() {
 		return new Event();
 	}
@@ -52,6 +58,10 @@ class PHPMC {
 	
 	public static function Update() {
 		return new Update();
+	}
+	
+	public static function Plugin() {
+		return new Plugin();
 	}
 	
 	public static function Error() {

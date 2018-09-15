@@ -1,6 +1,64 @@
 <?php
 class Event {
 	
+	public $eventList;
+	
+	public function registerClass($name, $class) {
+		$arr = $this->eventList;
+		$plug_one = @count($arr[$name]);
+		$arr[$name][$plug_one] = $class;
+		$this->eventList = $arr;
+	}
+	
+	public function EventHandle($name, $args) {
+		try {
+			// 如果此事件已经注册
+			if(isset($this->eventList[$name])) {
+				$breaked = false;
+				// 遍历事件列表，将每个插件的事件处理函数执行一次
+				foreach($this->eventList[$name] as $class) {
+					$rs = call_user_func_array(array($class, $name), $args);
+					// 如果事件被取消
+					if($rs == true) {
+						$breaked = true;
+						break;
+					}
+				}
+				// 如果事件未被取消
+				if(!$breaked) {
+					@call_user_func_array(array($this, $name), $args);
+				}
+			} else {
+				// 如果事件未注册
+				call_user_func_array(array($this, $name), $args);
+			}
+		} catch(Exception $ex) {
+			// 出错时
+			call_user_func_array(array($this, $name), $args);
+		}
+	}
+	
+	public function defaultActionEvent($data) {
+		$Loader = new Loader();
+		$Option = new Option();
+		echo $Loader->loadPage("404.html", ROOT . "/content/" . $Option->getOption("Theme") . "/error/");
+		exit;
+	}
+	
+	public function defaultPageEvent($data) {
+		$Loader = new Loader();
+		$Option = new Option();
+		echo $Loader->loadPage("panel.html", ROOT . "/content/" . $Option->getOption("Theme") . "/");
+		exit;
+	}
+	
+	public function viewPageEvent($data) {
+		$Loader = new Loader();
+		$Option = new Option();
+		echo $Loader->loadPage($data["page"] . ".html", ROOT . "/content/" . $Option->getOption("Theme") . "/");
+		exit;
+	}
+	
 	public function LoginEvent($Data) {
 		if(preg_match("/^[A-Za-z0-9\-\_]+$/", $Data['username'])) {
 			if(PHPMC::User()->Login($Data['username'], $Data['password'])) {
