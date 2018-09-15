@@ -62,9 +62,16 @@
 					},
 					data: {
 						username: urname,
-						password: passwd
+						password: passwd,
+						csrf_token: "{CSRF_TOKEN}"
 					}
 				});
+			};
+			window.onkeydown = function(event){
+				if(event.keyCode == 13) {
+					login();
+					return false;                               
+				}
 			};
 		</script>
 		<div class="content">

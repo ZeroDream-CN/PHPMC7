@@ -7,6 +7,7 @@ class Event {
 				SESSION_START();
 				$_SESSION['user'] = $Data['username'];
 				echo "Successful";
+				PHPMC::Csrf()->createCsrfToken();
 				exit;
 			} else {
 				$Option = new Option();
@@ -247,6 +248,16 @@ class Event {
 		if(!preg_match("/^[0-9]+$/", $data['owner'])) {
 			PHPMC::Error()->Println("请填写字段：服务器所有者");
 		}
+		$Server = new Server();
+		$Server->setServer($data['name']);
+		if($Server->uuid !== null) {
+			PHPMC::Error()->Println("相同名字的服务器已经存在。");
+		}
+		$Server->unselectServer();
+		$Server->setServer($data['port'], $data['daemon']);
+		if($Server->uuid !== null) {
+			PHPMC::Error()->Println("相同端口、相同 Daemon 的服务器已经存在。");
+		}
 		$Daemon = new Daemon();
 		if($Daemon->setDaemon($data['daemon']) == null) {
 			PHPMC::Error()->Println("Daemon 不存在，请检查参数是否正确。");
@@ -285,9 +296,24 @@ class Event {
 		if(!preg_match("/^[0-9]+$/", $data['owner'])) {
 			PHPMC::Error()->Println("请填写字段：服务器所有者");
 		}
+		$Server = new Server();
+		$Server2 = new Server();
+		$Server->setServer($data['id']);
+		if($Server->uuid == null) {
+			PHPMC::Error()->Println("Server Not Found");
+		}
+		$Server2->setServer($data['name']);
+		if($Server2->uuid !== null) {
+			PHPMC::Error()->Println("相同名字的服务器已经存在。");
+		}
+		$Server2->unselectServer();
+		$Server2->setServer($data['port'], $Server->daemon);
+		if($Server->uuid !== null) {
+			PHPMC::Error()->Println("相同端口、相同 Daemon 的服务器已经存在。");
+		}
 		PHPMC::Server()->updateServer($data['id'], $data['name'], $data['maxram'], $data['jar'], $data['startcommand'], 
 			$data['stopcommand'], $data['owner'], "normal", $data['port'], $data['ftppass']);
-		echo "服务器设置更改成功！";
+		echo "服务器设置更改成功，您需要刷新网页后设置才会生效。";
 		exit;
 	}
 	
@@ -340,8 +366,12 @@ class Event {
 		if(!preg_match("/^[a-z]+$/", $data['type'])) {
 			PHPMC::Error()->Println("请填写字段：服务器操作系统类型");
 		}
+		$Daemon = new Daemon();
+		if($Daemon->setDaemon($data['id']) == null) {
+			PHPMC::Error()->Println("Daemon Not Found");
+		}
 		PHPMC::Daemon()->updateDaemon($data['id'], $data['name'], $data['host'], $data['pass'], $data['fqdn'], $data['type']);
-		echo "Daemon 设置更改成功！";
+		echo "Daemon 设置更改成功，您需要刷新网页后设置才会生效。";
 		exit;
 	}
 	
@@ -374,6 +404,14 @@ class Event {
 		if(!preg_match("/^[A-Za-z0-9\_\-\;\:]+$/", $data['permission'])) {
 			PHPMC::Error()->Println("请填写字段：用户权限");
 		}
+		$Profile = new Profile($data['username']);
+		if($Profile->username == $data['username'] && $Profile->id !== $data['id']) {
+			PHPMC::Error()->Println("此用户名已经存在。");
+		}
+		$Profile = new Profile($data['email']);
+		if($Profile->email == $data['email'] && $Profile->id !== $data['id']) {
+			PHPMC::Error()->Println("此邮箱已经存在。");
+		}
 		$password = password_hash(md5($data['password']), PASSWORD_BCRYPT);
 		PHPMC::User()->createUser($data['username'], $password, $data['email'], $data['permission']);
 		echo "用户创建成功！";
@@ -393,13 +431,25 @@ class Event {
 		if(!preg_match("/^[A-Za-z0-9\_\-\;\:]+$/", $data['permission'])) {
 			PHPMC::Error()->Println("请填写字段：用户权限");
 		}
+		$Profile = new Profile($data['id']);
+		if($Profile->username == null) {
+			PHPMC::Error()->Println("User Not Found");
+		}
+		$Profile = new Profile($data['username']);
+		if($Profile->username == $data['username'] && $Profile->id !== $data['id']) {
+			PHPMC::Error()->Println("此用户名已经存在。");
+		}
+		$Profile = new Profile($data['email']);
+		if($Profile->email == $data['email'] && $Profile->id !== $data['id']) {
+			PHPMC::Error()->Println("此邮箱已经存在。");
+		}
 		if(empty($data['password'])) {
 			PHPMC::User()->updateUser($data['id'], $data['username'], false, $data['email'], $data['permission']);
 		} else {
 			$password = password_hash(md5($data['password']), PASSWORD_BCRYPT);
 			PHPMC::User()->updateUser($data['id'], $data['username'], $password, $data['email'], $data['permission']);
 		}
-		echo "用户设置更改成功！";
+		echo "用户设置更改成功，您需要刷新网页后设置才会生效。";
 		exit;
 	}
 	
@@ -408,7 +458,7 @@ class Event {
 			PHPMC::Error()->Println("请填写字段：用户 ID");
 		}
 		$Profile = new Profile($data['id']);
-		if($Daemon->setDaemon($data['id']) == null) {
+		if($Profile->username == null) {
 			PHPMC::Error()->Println("User Not Found");
 		}
 		if(PHPMC::Server()->getCountsByOwner($data['id']) > 0) {
@@ -433,7 +483,7 @@ class Event {
 			PHPMC::Error()->Println("请填写字段：系统主题");
 		}
 		PHPMC::Option()->saveConfig($data['SiteName'], $data['Description'], $data['Theme']);
-		echo "系统设置更改成功！";
+		echo "系统设置更改成功，您需要刷新网页后设置才会生效。";
 		exit;
 	}
 	

@@ -1,5 +1,5 @@
 <?php
-define("PHPMC_VERSION", "7.3.1709"); // Don't Change This!
+define("PHPMC_VERSION", "7.3.2105"); // Don't Change This!
 include(ROOT . "/include/core/PHPMC/Event.php");
 include(ROOT . "/include/core/PHPMC/User.php");
 include(ROOT . "/include/core/PHPMC/Utils.php");
@@ -12,6 +12,7 @@ include(ROOT . "/include/core/PHPMC/Http.php");
 include(ROOT . "/include/core/PHPMC/Option.php");
 include(ROOT . "/include/core/PHPMC/Permission.php");
 include(ROOT . "/include/core/PHPMC/Update.php");
+include(ROOT . "/include/core/PHPMC/Csrf.php");
 class PHPMC {
 	public static function Event() {
 		return new Event();
@@ -35,6 +36,10 @@ class PHPMC {
 	
 	public static function Http() {
 		return new Http();
+	}
+	
+	public static function Csrf() {
+		return new Csrf();
 	}
 	
 	public static function Option() {

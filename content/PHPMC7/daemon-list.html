@@ -127,11 +127,10 @@
 			};
 			function createDaemon() {
 				var htmlobj = $.ajax({
-					url: "?",
+					url: "?action=createdaemon",
 					async:true,
 					timeout:5000,
 					data: {
-						action: "createdaemon",
 						name: $("#name").val(),
 						host: $("#host").val(),
 						pass: $("#pass").val(),
@@ -151,11 +150,10 @@
 			}
 			function updateDaemon() {
 				var htmlobj = $.ajax({
-					url: "?",
+					url: "?action=updatedaemon",
 					async:true,
 					timeout:5000,
 					data: {
-						action: "updatedaemon",
 						id: selected,
 						name: $("#modify_name").val(),
 						host: $("#modify_host").val(),
@@ -177,11 +175,10 @@
 			function deleteDaemon() {
 				if(confirm("您确定要删除此 Daemon 吗？此操作不可恢复！")) {
 					var htmlobj = $.ajax({
-						url: "?",
+						url: "?action=deletedaemon",
 						async:true,
 						timeout:5000,
 						data: {
-							action: "deletedaemon",
 							id: selected
 						},
 						error: function() {

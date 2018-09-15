@@ -16,14 +16,16 @@ class Server {
 	public $uuid;
 	
 	/**
-	 * 选择要操作的服务器
+	 * 选择要操作的服务器，这里写的很杂
 	 *
 	 * @param $server 服务器 ID
+	 * @param $daemon 服务器所在 Daemon
 	 */
-	public function setServer($server) {
+	public function setServer($server, $daemon = false) {
 		$this->server = $server;
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		// Method 1 通过服务器 ID 查找服务器
 		$rs = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`servers` WHERE `id`='" . $this->server . "'"));
 		if($rs) {
 			$this->id = $rs['id'];
@@ -38,7 +40,106 @@ class Server {
 			$this->port = $rs['port'];
 			$this->ftppass = $rs['ftppass'];
 			$this->uuid = $rs['uuid'];
+		} else {
+			// Method 2 通过服务器 UUID 查找服务器
+			$rs = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`servers` WHERE `uuid`='" . $this->server . "'"));
+			if($rs) {
+				$this->id = $rs['id'];
+				$this->name = $rs['name'];
+				$this->daemon = $rs['daemon'];
+				$this->maxram = $rs['maxram'];
+				$this->jar = $rs['jar'];
+				$this->startcommand = $rs['startcommand'];
+				$this->stopcommand = $rs['stopcommand'];
+				$this->owner = $rs['owner'];
+				$this->status = $rs['status'];
+				$this->port = $rs['port'];
+				$this->ftppass = $rs['ftppass'];
+				$this->uuid = $rs['uuid'];
+			} else {
+				// Method 3 通过服务器名字查找服务器
+				$rs = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`servers` WHERE `name`='" . $this->server . "'"));
+				if($rs) {
+					$this->id = $rs['id'];
+					$this->name = $rs['name'];
+					$this->daemon = $rs['daemon'];
+					$this->maxram = $rs['maxram'];
+					$this->jar = $rs['jar'];
+					$this->startcommand = $rs['startcommand'];
+					$this->stopcommand = $rs['stopcommand'];
+					$this->owner = $rs['owner'];
+					$this->status = $rs['status'];
+					$this->port = $rs['port'];
+					$this->ftppass = $rs['ftppass'];
+					$this->uuid = $rs['uuid'];
+				} else {
+					// Method 4 通过服务器端口查找服务器
+					if($daemon) {
+						$rs = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`servers` WHERE `port`='" . $this->server . "' AND `daemon`='{$daemon}'"));
+						if($rs) {
+							$this->id = $rs['id'];
+							$this->name = $rs['name'];
+							$this->daemon = $rs['daemon'];
+							$this->maxram = $rs['maxram'];
+							$this->jar = $rs['jar'];
+							$this->startcommand = $rs['startcommand'];
+							$this->stopcommand = $rs['stopcommand'];
+							$this->owner = $rs['owner'];
+							$this->status = $rs['status'];
+							$this->port = $rs['port'];
+							$this->ftppass = $rs['ftppass'];
+							$this->uuid = $rs['uuid'];
+						} else {
+							// 未找到任何数据，返回 null
+							$this->id = null;
+							$this->name = null;
+							$this->daemon = null;
+							$this->maxram = null;
+							$this->jar = null;
+							$this->startcommand = null;
+							$this->stopcommand = null;
+							$this->owner = null;
+							$this->status = null;
+							$this->port = null;
+							$this->ftppass = null;
+							$this->uuid = null;
+						}
+					} else {
+						// 未找到任何数据，返回 null
+						$this->id = null;
+						$this->name = null;
+						$this->daemon = null;
+						$this->maxram = null;
+						$this->jar = null;
+						$this->startcommand = null;
+						$this->stopcommand = null;
+						$this->owner = null;
+						$this->status = null;
+						$this->port = null;
+						$this->ftppass = null;
+						$this->uuid = null;
+					}
+				}
+			}
 		}
+	}
+	
+	/**
+	 * 取消选择服务器
+	 */
+	public function unselectServer() {
+		$this->id = null;
+		$this->name = null;
+		$this->daemon = null;
+		$this->maxram = null;
+		$this->jar = null;
+		$this->startcommand = null;
+		$this->stopcommand = null;
+		$this->owner = null;
+		$this->status = null;
+		$this->port = null;
+		$this->ftppass = null;
+		$this->uuid = null;
 	}
 	
 	/**
@@ -57,11 +158,13 @@ class Server {
 	 * @return Boolean		创建状态
 	 */
 	public function createServer($name, $daemon, $maxram, $jar, $startcommand, $stopcommand, $owner, $status, $port, $ftppass) {
-		$uuid = md5(md5(time() . rand(0, 999999)));
+		$uuid = md5(uniqid(rand(0, 10000000), TRUE));
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
 		mysqli_query($conn, "INSERT INTO `{$db['name']}`.`servers` (`id`, `name`, `daemon`, `maxram`, `jar`, `startcommand`, `stopcommand`, `owner`, `status`, `port`, `uuid`, `ftppass`) "
 			. "VALUES (NULL, '{$name}', '{$daemon}', '{$maxram}', '{$jar}', '{$startcommand}', '{$stopcommand}', '{$owner}', '{$status}', '{$port}', '{$uuid}', '{$ftppass}')");
+		$this->setServer($uuid);
+		$this->Init();
 		return true;
 	}
 	

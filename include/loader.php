@@ -37,6 +37,7 @@ class Loader {
 		$str = str_replace("{USERNAME}", $Profile->username, $str);
 		$str = str_replace("{USERMAIL}", $Profile->email, $str);
 		$str = str_replace("{AVATAR_HASH}", md5($Profile->email), $str);
+		$str = str_replace("{CSRF_TOKEN}", $_SESSION['token'], $str);
 		preg_match_all("/\{User\:(.*)\}/U", $str, $arr);
 		for($i = 0;$i < count($arr[0]);$i++) {
 			$User = new User();
@@ -75,6 +76,9 @@ class Loader {
 	 *
 	 **/
 	public function router() {
+		if(PHPMC::Csrf()->isemptyCsrfToken()) {
+			PHPMC::Csrf()->createCsrfToken();
+		}
 		$Option = new Option();
 		if(preg_match("/^[A-Za-z0-9\-\_]+$/", $_GET["page"])) {
 			PHPMC::Permission()->checkSession("page:" . $_GET['page']);
@@ -83,6 +87,9 @@ class Loader {
 		} elseif($_GET['action']) {
 			switch($_GET['action']) {
 				case 'login':
+					if(!PHPMC::Csrf()->verifyCsrfToken($_POST)) {
+						PHPMC::Error()->Println("Csrf 验证失败，请刷新页面重试。");
+					}
 					PHPMC::Event()->LoginEvent($_POST);
 					break;
 				case 'logout':

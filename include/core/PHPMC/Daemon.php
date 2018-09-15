@@ -147,7 +147,7 @@ class Daemon {
 		while($rw = mysqli_fetch_row($rs)) {
 			$data .= "<div class='server-hover' onclick='selectDaemon({$rw[0]}, this)'>
 				<h5>{$rw[1]}</h5>
-				<p>{$rw[3]} | 操作系统：{$rw[4]}</p>
+				<p>{$rw[5]} | 操作系统：{$rw[4]}</p>
 			</div>";
 		}
 		mysqli_close($conn);
