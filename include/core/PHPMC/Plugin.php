@@ -1,6 +1,8 @@
 <?php
 class Plugin {
 	
+	public $plugins;
+	
 	public function __construct() {
 		if(!file_exists("plugins/")) {
 			mkdir("plugins/", 0775);
@@ -21,7 +23,11 @@ class Plugin {
 						if(!$info) {
 							PHPMC::Error()->Println("Error when load plugin: " . $files . ": No such plugin info file: " . $target . "<br>" . $data);
 						}
+						if(stristr($this->plugins, $info['package'] . ";")) {
+							continue;
+						}
 						include("{$realpath}/{$file}/{$files}");
+						$this->plugin .= $info['package'] . ";";
 						eval('$' . $info['main'] . ' = new ' . $info['main'] . '();');
 						eval('$' . $info['main'] . '->onload();');
 					} else {
@@ -36,7 +42,11 @@ class Plugin {
 						if(!$info) {
 							PHPMC::Error()->Println("Error when load plugin: " . $file . ": No such plugin info file: " . $target . "<br>" . $data);
 						}
+						if(stristr($this->plugins, $info['package'] . ";")) {
+							continue;
+						}
 						include("{$realpath}/{$file}");
+						$this->plugin .= $info['package'] . ";";
 						eval('$' . $info['main'] . ' = new ' . $info['main'] . '();');
 						eval('$' . $info['main'] . '->onload();');
 					}

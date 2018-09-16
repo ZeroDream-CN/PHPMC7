@@ -1,7 +1,7 @@
 <?php
 // PHPMC 7 Version define
 // Don't change this, because it will interfere your update.
-define("PHPMC_VERSION", "7.3.3199");
+define("PHPMC_VERSION", "7.3.3200");
 
 include(ROOT . "/include/core/PHPMC/Event.php");
 include(ROOT . "/include/core/PHPMC/User.php");
