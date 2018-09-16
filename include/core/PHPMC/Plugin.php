@@ -11,16 +11,36 @@ class Plugin {
 		$realpath = realpath($path);
 		$handle = opendir($path);
 		while($file = readdir($handle)) {
-			if($file !== "." && $file !== ".." && pathinfo($file)['extension'] == "php") {
-				$target = pathinfo($file)['filename'] . ".json";
-				$data = $this->pluginReader("{$realpath}/{$target}");
-				$info = json_decode($data, true);
-				if(!$info) {
-					PHPMC::Error()->Println("Error when load plugin: " . $file . ": No such plugin info file: " . $target . "<br>" . $data);
+			if($file !== "." && $file !== "..") {
+				if(is_dir("{$realpath}/{$file}/")) {
+					if(file_exists("{$realpath}/{$file}/{$file}.php") && file_exists("{$realpath}/{$file}/{$file}.json")) {
+						$files = "{$file}.php";
+						$target = pathinfo($files)['filename'] . ".json";
+						$data = file_get_contents("{$realpath}/{$file}/{$target}");
+						$info = json_decode($data, true);
+						if(!$info) {
+							PHPMC::Error()->Println("Error when load plugin: " . $files . ": No such plugin info file: " . $target . "<br>" . $data);
+						}
+						include("{$realpath}/{$file}/{$files}");
+						eval('$' . $info['main'] . ' = new ' . $info['main'] . '();');
+						eval('$' . $info['main'] . '->onload();');
+					} else {
+						echo "Error: {$realpath}/{$file}/{$file}.php";
+						exit;
+					}
+				} else {
+					if(pathinfo($file)['extension'] == "php") {
+						$target = pathinfo($file)['filename'] . ".json";
+						$data = file_get_contents("{$realpath}/{$target}");
+						$info = json_decode($data, true);
+						if(!$info) {
+							PHPMC::Error()->Println("Error when load plugin: " . $file . ": No such plugin info file: " . $target . "<br>" . $data);
+						}
+						include("{$realpath}/{$file}");
+						eval('$' . $info['main'] . ' = new ' . $info['main'] . '();');
+						eval('$' . $info['main'] . '->onload();');
+					}
 				}
-				include("{$realpath}/{$file}");
-				eval('$' . $info['main'] . ' = new ' . $info['main'] . '();');
-				eval('$' . $info['main'] . '->onload();');
 			}
 		}
 		closedir($handle);
