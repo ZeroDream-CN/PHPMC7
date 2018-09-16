@@ -291,7 +291,7 @@ class Event {
 		if(!preg_match("/^[A-Za-z0-9\-\_\.]+$/", $data['jar'])) {
 			PHPMC::Error()->Println("请填写字段：核心文件名字，只能包含英文大小写、数字、_、. 和 -");
 		}
-		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\} ]+$/", $data['startcommand'])) {
+		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\}\:\/\\\= ]+$/", $data['startcommand'])) {
 			PHPMC::Error()->Println("请填写字段：核心启动命令");
 		}
 		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\} ]+$/", $data['stopcommand'])) {
@@ -339,7 +339,7 @@ class Event {
 		if(!preg_match("/^[A-Za-z0-9\-\_\.]+$/", $data['jar'])) {
 			PHPMC::Error()->Println("请填写字段：核心文件名字，只能包含英文大小写、数字、_、. 和 -");
 		}
-		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\} ]+$/", $data['startcommand'])) {
+		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\}\:\/\\\= ]+$/", $data['startcommand'])) {
 			PHPMC::Error()->Println("请填写字段：核心启动命令");
 		}
 		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\} ]+$/", $data['stopcommand'])) {
@@ -361,12 +361,12 @@ class Event {
 			PHPMC::Error()->Println("Server Not Found");
 		}
 		$Server2->setServer($data['name']);
-		if($Server2->uuid !== null) {
+		if($Server2->uuid !== null && $Server2->id !== $data['id']) {
 			PHPMC::Error()->Println("相同名字的服务器已经存在。");
 		}
 		$Server2->unselectServer();
 		$Server2->setServer($data['port'], $Server->daemon);
-		if($Server->uuid !== null) {
+		if($Server2->uuid !== null && $Server2->id !== $data['id']) {
 			PHPMC::Error()->Println("相同端口、相同 Daemon 的服务器已经存在。");
 		}
 		PHPMC::Server()->updateServer($data['id'], $data['name'], $data['maxram'], $data['jar'], $data['startcommand'], 
