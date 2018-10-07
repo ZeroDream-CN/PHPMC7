@@ -102,6 +102,27 @@
 					}
 				});
 			}
+			function saveConfig() {
+				var htmlobj = $.ajax({
+					url: "/?action=saveconfig",
+					async:true,
+					timeout:5000,
+					data: {
+						SiteName: $("#SiteName").val(),
+						Description: $("#Description").val(),
+						Theme: $("#Theme").val()
+					},
+					error: function() {
+						window.parent.frames.showmsg(htmlobj.responseText);
+					},
+					success: function() {
+						console.log(htmlobj.responseText);
+						window.parent.frames.showmsg(htmlobj.responseText);
+						location = '?page=setting'
+						return;
+					}
+				});
+			}
 			window.onload = function() {
 				checkUpdate();
 			}
