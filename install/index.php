@@ -63,6 +63,7 @@ function install() {
 	$password = password_hash(md5($password), PASSWORD_BCRYPT);
 	$conn = mysqli_connect($db_host, $db_user, $db_pass, "", $db_port) or die("<script>alert('无法连接到 MySQL 数据库，请检查。错误：" . mysqli_error($conn) . "');location='?step=2';</script>");
 	mysqli_select_db($conn, $db_name) or die("<script>alert('数据库 {$db_name} 不存在！');location='?step=2';</script>");
+	mysqli_query($conn, "set names 'utf8mb4'");
 	mysqli_query($conn, "SET FOREIGN_KEY_CHECKS=0;") or die("<script>alert('错误：" . mysqli_error($conn) . "');location='?step=2';</script>");
 	mysqli_query($conn, "CREATE TABLE `daemon` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
