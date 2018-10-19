@@ -10,7 +10,7 @@ if($result == "") {
 	$db = Config::MySQL();
 	$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
 	mysqli_query($conn, "set names 'utf8mb4'");
-	mysqli_query($conn, "INSERT INTO `option` VALUES ('4', 'Lang', 'zh_CN')");
+	mysqli_query($conn, "INSERT INTO `option` VALUES (NULL, 'Lang', 'zh_CN')");
 	$result = "zh_CN";
 	mysqli_close($conn);
 }

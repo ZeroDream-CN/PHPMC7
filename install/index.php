@@ -107,6 +107,7 @@ function install() {
 	mysqli_query($conn, "INSERT INTO `option` VALUES ('2', 'SiteName', '{$SiteName}');") or die("<script>alert('错误：" . mysqli_error($conn) . "');location='?step=2';</script>");
 	mysqli_query($conn, "INSERT INTO `option` VALUES ('3', 'Description', '{$Description}');") or die("<script>alert('错误：" . mysqli_error($conn) . "');location='?step=2';</script>");
 	mysqli_query($conn, "INSERT INTO `option` VALUES ('4', 'Theme', 'PHPMC7');") or die("<script>alert('错误：" . mysqli_error($conn) . "');location='?step=2';</script>");
+	mysqli_query($conn, "INSERT INTO `option` VALUES ('5', 'Lang', 'zh_CN');") or die("<script>alert('错误：" . mysqli_error($conn) . "');location='?step=2';</script>");
 	mysqli_query($conn, "INSERT INTO `users` VALUES ('1', '{$username}', '{$password}', '{$email}', 'admin;');") or die("<script>alert('错误：" . mysqli_error($conn) . "');location='?step=2';</script>");
 	mysqli_query($conn, "INSERT INTO `daemon` VALUES ('1', 'Example Daemon', 'http://127.0.0.1:21567/', '123456789', 'windows', '127.0.0.1');") or die("<script>alert('错误：" . mysqli_error($conn) . "');location='?step=2';</script>");
 	@file_put_contents("../include/data/config.php", '<?php
