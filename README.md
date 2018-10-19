@@ -34,3 +34,10 @@ PHPMC 7 支持权限细分，每个操作都可以设定权限。
 。。。懒得写了。。Markdown真麻烦。。。
 
 看这里吧：http://www.mcbbs.net/thread-819800-1-1.html
+
+### 多语言 Multi-language
+PHPMC 7 目前已支持多语言，您可以在 PHPMC 7 设置中切换系统语言，例如 `en_US`。
+
+PHPMC 7 now support multi-language, you can change the system language in setting such as `en_US`.
+
+俄罗斯语：https://github.com/maxim19116/PHPMC7 由 @maxim19116 翻译。
