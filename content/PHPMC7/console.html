@@ -33,44 +33,44 @@
 				<div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>服务器控制台</h5>
+                            <h5>{{ $Lang->str('服务器控制台'); }}</h5>
 						</div>
                         <div class="ibox-content" style="">
 							<div id="debug" class="console" style="overflow: unset;overflow-y: scroll;"></div>
-							<input id="command" style="background: none;top: 0px;outline: none;" placeholder="在此处输入命令，Enter 提交">
+							<input id="command" style="background: none;top: 0px;outline: none;" placeholder="{{ $Lang->str('在此处输入命令，Enter 提交'); }}">
 						</div>
 					</div>
                 </div>
                 <div class="col-lg-8">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>服务器控制台</h5></div>
+                            <h5>{{ $Lang->str('服务器控制台'); }}</h5></div>
                         <div class="ibox-content">
                             <h1 class="no-margins">
                                 <span class="text-info" id="online"></span> /
                                 <span class="text-danger" id="max"></span></h1>
-                            <small>在线玩家 / 最大在线</small>
+                            <small>{{ $Lang->str('在线玩家'); }} / {{ $Lang->str('最大在线'); }}</small>
 							<br>
-							<span>当前延迟：<span id="ping">Pinging ...</span></span>
+							<span>{{ $Lang->str('当前延迟：'); }}<span id="ping">Pinging ...</span></span>
 							<br><br>
-							<button class="btn btn-primary" id="btn1" onclick="startServer()"><i class="fa fa-play"></i> 开启</button>
+							<button class="btn btn-primary" id="btn1" onclick="startServer()"><i class="fa fa-play"></i> {{ $Lang->str('开启'); }}</button>
 							<div class="s8px"></div>
-							<button class="btn btn-danger" id="btn2" onclick="stopServer()"><i class="fa fa-stop"></i> 关闭</button>
+							<button class="btn btn-danger" id="btn2" onclick="stopServer()"><i class="fa fa-stop"></i> {{ $Lang->str('关闭'); }}</button>
 							<div class="s8px"></div>
-							<button class="btn btn-warning" id="btn3" onclick="restartServer()"><i class="fa fa-refresh"></i> 重启</button>
+							<button class="btn btn-warning" id="btn3" onclick="restartServer()"><i class="fa fa-refresh"></i> {{ $Lang->str('重启'); }}</button>
 							<p style="margin-top: 8px;">
-								<input type="checkbox" checked="true" id="autoflush"> <span style="position: relative;top: -2px;">保持输出滚动</span></input>
+								<input type="checkbox" checked="true" id="autoflush"> <span style="position: relative;top: -2px;">{{ $Lang->str('保持输出滚动'); }}</span></input>
 							</p>
-							<p>游戏地址：<code id="gamehost"></code></p>
-							<p>FTP 账号：<code id="ftpuser"></code></p>
-							<p>FTP 密码：<code id="ftppass"></code></p>
+							<p>{{ $Lang->str('游戏地址：'); }}<code id="gamehost"></code></p>
+							<p>{{ $Lang->str('FTP 账号：'); }}<code id="ftpuser"></code></p>
+							<p>{{ $Lang->str('FTP 密码：'); }}<code id="ftppass"></code></p>
 						</div>
                     </div>
                 </div>
 				<div class="col-lg-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>选择服务器</h5>
+                            <h5>{{ $Lang->str('选择服务器'); }}</h5>
 						</div>
                         <div class="ibox-content">
 							{{ PHPMC::Server()->getServerList() }}

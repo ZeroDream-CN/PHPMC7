@@ -33,30 +33,32 @@
 				<div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>PHPMC 7 设置</h5>
+                            <h5>{{ $Lang->str('PHPMC 7 设置'); }}</h5>
 						</div>
                         <div class="ibox-content addfrp">
-							<h4>感谢您使用 PHPMC <span class="text-success">7</span></h4>
-							<p>如果您在使用中遇到任何问题，请与我取得联系。</p>
-							<p>QQ：204034 | Email：akkariin@akkariin.com</p>
+							<h4>{{ $Lang->str('感谢您使用 PHPMC'); }} <span class="text-success">7</span></h4>
+							<p>{{ $Lang->str('如果您在使用中遇到任何问题，请与我取得联系。'); }}</p>
+							<p>{{ $Lang->str('QQ：204034 | Email：akkariin@akkariin.com'); }}</p>
 							<hr>
-							<p>站点名称</p>
+							<p>{{ $Lang->str('站点名称'); }}</p>
 							<input type="text" class="form-control" id="SiteName" value="{Option:SiteName}" />
-							<p>站点简介</p>
+							<p>{{ $Lang->str('站点简介'); }}</p>
 							<input type="text" class="form-control" id="Description" value="{Option:Description}" />
-							<p>系统主题</p>
+							<p>{{ $Lang->str('系统主题'); }}</p>
 							<input type="text" class="form-control" id="Theme" value="{Option:Theme}" />
+							<p>{{ $Lang->str('系统语言'); }}</p>
+							<input type="text" class="form-control" id="Lang" value="{Option:Lang}" />
 							<div class="text-right" style="margin-top: 16px;">
-								<button class="btn btn-primary" onclick="saveConfig()">保存设置</button>
+								<button class="btn btn-primary" onclick="saveConfig()">{{ $Lang->str('保存设置'); }}</button>
 							</div>
 						</div>
 					</div>
 					<div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>检查更新</h5>
+                            <h5>{{ $Lang->str('检查更新'); }}</h5>
 						</div>
                         <div class="ibox-content addfrp" id="update">
-							<p>请稍后，正在检查软件更新...</p>
+							<p>{{ $Lang->str('请稍后，正在检查软件更新...'); }}</p>
 						</div>
 					</div>
                 </div>
@@ -65,29 +67,51 @@
 		<script type="text/javascript">
 			var version = "{{ PHPMC_VERSION; }}";
 			var newversion;
+			function saveConfig() {
+				var htmlobj = $.ajax({
+					url: "/?action=saveconfig",
+					async:true,
+					timeout:5000,
+					data: {
+						SiteName: $("#SiteName").val(),
+						Description: $("#Description").val(),
+						Theme: $("#Theme").val(),
+						Lang: $("#Lang").val()
+					},
+					error: function() {
+						window.parent.frames.showmsg(htmlobj.responseText);
+					},
+					success: function() {
+						console.log(htmlobj.responseText);
+						window.parent.frames.showmsg(htmlobj.responseText);
+						location = '?page=setting';
+						return;
+					}
+				});
+			}
 			function checkUpdate() {
 				var htmlobj = $.ajax({
 					url: "https://www.phpmc.cn/update.php?version={{ PHPMC_VERSION; }}",
 					async: true,
 					timeout:5000,
 					error: function(e) {
-						window.parent.frames.showmsg("检查更新错误：" + htmlobj.responseText);
+						window.parent.frames.showmsg("{{ $Lang->str('检查更新错误：'); }}" + htmlobj.responseText);
 					},
 					success: function() {
 						console.log(htmlobj.responseText);
 						var data = JSON.parse(htmlobj.responseText);
 						newversion = data.version;
 						if(version == newversion) {
-							$("#update").html("<p>本地版本：" + version + "</p><p>最新版本：" + newversion + "</p><p>您的 PHPMC 已经是最新版本，无需更新。</p>");
+							$("#update").html("<p>{{ $Lang->str('本地版本：'); }}" + version + "</p><p>{{ $Lang->str('最新版本：'); }}" + newversion + "</p><p>{{ $Lang->str('您的 PHPMC 已经是最新版本，无需更新。'); }}</p>");
 							return;
 						}
-						$("#update").html("<p>本地版本：" + version + "</p><p>最新版本：" + newversion + "</p><p>更新内容：<br>" + data.feature + "</p><p><button class='btn btn-primary' onclick='update()'>立即更新</button></p>");
+						$("#update").html("<p>{{ $Lang->str('本地版本：'); }}" + version + "</p><p>{{ $Lang->str('最新版本：'); }}" + newversion + "</p><p>{{ $Lang->str('更新内容：'); }}<br>" + data.feature + "</p><p><button class='btn btn-primary' onclick='update()'>{{ $Lang->str('立即更新'); }}</button></p>");
 						return;
 					}
 				});
 			}
 			function update() {
-				window.parent.frames.showmsg("请稍后，正在执行系统更新...");
+				window.parent.frames.showmsg("{{ $Lang->str('请稍后，正在执行系统更新...'); }}");
 				var htmlobj = $.ajax({
 					url: "?action=update",
 					async:true,
@@ -98,27 +122,6 @@
 					success: function() {
 						console.log(htmlobj.responseText);
 						window.parent.frames.showmsg(htmlobj.responseText);
-						return;
-					}
-				});
-			}
-			function saveConfig() {
-				var htmlobj = $.ajax({
-					url: "/?action=saveconfig",
-					async:true,
-					timeout:5000,
-					data: {
-						SiteName: $("#SiteName").val(),
-						Description: $("#Description").val(),
-						Theme: $("#Theme").val()
-					},
-					error: function() {
-						window.parent.frames.showmsg(htmlobj.responseText);
-					},
-					success: function() {
-						console.log(htmlobj.responseText);
-						window.parent.frames.showmsg(htmlobj.responseText);
-						location = '?page=setting'
 						return;
 					}
 				});

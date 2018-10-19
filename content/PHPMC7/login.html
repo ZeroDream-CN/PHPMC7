@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>{Option:SiteName} — 登陆</title>
+		<title>{Option:SiteName} — {{ $Lang->str('登陆'); }}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="robots" content="noindex" />
 		<link href="content/{Option:Theme}/css/sakura.css" type="text/css" rel="stylesheet" />
@@ -15,7 +15,7 @@
 				<table>
 					<tr>
 						<td>
-							<h2>提示信息</h2>
+							<h2>{{ $Lang->str('提示信息'); }}</h2>
 						</td>
 					</tr>
 					<tr>
@@ -87,18 +87,18 @@
 						<table>
 							<tr>
 								<td class="label">
-									<span>账号</span>
+									<span>{{ $Lang->str('账号'); }}</span>
 								</td>
 								<td>
-									<input id="login_username" placeholder="用户名" type="text" name="username" />
+									<input id="login_username" placeholder="{{ $Lang->str('用户名'); }}" type="text" name="username" />
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<span>密码</span>
+									<span>{{ $Lang->str('密码'); }}</span>
 								</td>
 								<td>
-									<input id="login_passwd" placeholder="密码" type="password" name="password" />
+									<input id="login_passwd" placeholder="{{ $Lang->str('密码'); }}" type="password" name="password" />
 								</td>
 							</tr>
 							<tr>
@@ -108,12 +108,12 @@
 							<tr>
 								<td>
 									<span class="pre-text">
-										<a href="?page=findpass">忘记密码</a>
+										<a href="?page=findpass">{{ $Lang->str('忘记密码'); }}</a>
 									</span>
 								</td>
 								<td>
 									<div class="btn-content">
-										<button class="btn-login" onclick="login()">Log In</button>
+										<button class="btn-login" onclick="login()">{{ $Lang->str('Log In'); }}</button>
 									</div>
 								</td>
 							</tr>
@@ -122,9 +122,9 @@
 				</div>
 				<div class="right-tips">
 					<div class="tips-content">
-						<p>欢迎登录 <b>{Option:SiteName}</b> {Option:Description}</p>
-						<p>本平台由 Akkariin 开发。</p>
-						<p>作者QQ：204034&nbsp;&nbsp;邮箱：akkariin@akkariin.com</p>
+						<p>{{ $Lang->str('欢迎登录'); }} <b>{Option:SiteName}</b> {Option:Description}</p>
+						<p>{{ $Lang->str('本平台由 Akkariin 开发。'); }}</p>
+						<p>{{ $Lang->str('作者QQ：204034&nbsp;&nbsp;邮箱：akkariin@akkariin.com'); }}</p>
 					</div>
 				</div>
 			</div>

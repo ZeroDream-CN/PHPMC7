@@ -30,35 +30,35 @@
                 <div class="col-sm-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>系统数据统计</h5>
+                            <h5>{{ $Lang->str('系统数据统计'); }}</h5>
 						</div>
                         <div class="ibox-content">
                             <div class="row">
 								<div class="col-sm-3 box-hover">
 									<center>
 										<h1><i class="fa fa-cubes"></i></h1>
-										<h4>Daemon 数量</h4>
+										<h4>{{ $Lang->str('Daemon 数量'); }}</h4>
 										<p>{Daemon:getCounts}</p>
 									</center>
 								</div>
 								<div class="col-sm-3 box-hover">
 									<center>
 										<h1><i class="fa fa-cubes"></i></h1>
-										<h4>Minecraft 服务器数量</h4>
+										<h4>{{ $Lang->str('Minecraft 服务器数量'); }}</h4>
 										<p>{Server:getCounts}</p>
 									</center>
 								</div>
 								<div class="col-sm-3 box-hover">
 									<center>
 										<h1><i class="fa fa-key"></i></h1>
-										<h4>登录失败次数</h4>
+										<h4>{{ $Lang->str('登录失败次数'); }}</h4>
 										<p>{Option:loginFailed}</p>
 									</center>
 								</div>
 								<div class="col-sm-3 box-hover">
 									<center>
 										<h1><i class="fa fa-users"></i></h1>
-										<h4>用户数量</h4>
+										<h4>{{ $Lang->str('用户数量'); }}</h4>
 										<p>{User:getCounts}</p>
 									</center>
 								</div>
@@ -69,25 +69,25 @@
                 <div class="col-lg-8">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>主页</h5></div>
+                            <h5>{{ $Lang->str('主页'); }}</h5></div>
                         <div class="ibox-content" id="debug">
-							<p>欢迎使用 PHPMC <span class="text-success">7</span> 管理面板系统</p>
-							<p>您正在使用的 PHPMC 版本为：{System:get_phpmc_version}</p>
-							<p>如果您在使用中遇到任何问题，请与我取得联系，QQ：204034。</p>
-							<p>PHPMC 官方网站：<a href="https://www.phpmc.cn/" target="_blank">https://www.phpmc.cn/</a></p>
+							<p>{{ $Lang->str('欢迎使用 PHPMC'); }} <span class="text-success">7</span> {{ $Lang->str('管理面板系统'); }}</p>
+							<p>{{ $Lang->str('您正在使用的 PHPMC 版本为：'); }}{System:get_phpmc_version}</p>
+							<p>{{ $Lang->str('如果您在使用中遇到任何问题，请与我取得联系，QQ：204034。'); }}</p>
+							<p>{{ $Lang->str('PHPMC 官方网站：'); }}<a href="https://www.phpmc.cn/" target="_blank">https://www.phpmc.cn/</a></p>
                         </div>
 					</div>
                 </div>
 				<div class="col-lg-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>系统信息</h5>
+                            <h5>{{ $Lang->str('系统信息'); }}</h5>
 						</div>
                         <div class="ibox-content" id="debug">
-							<p>PHP 版本：{System:get_PHP_Version}</p>
-							<p>PHP 运行方式：{System:get_php_sapi_name}</p>
-							<p>服务器操作系统：{System:get_php_os}</p>
-							<p>HTTP 服务器：{System:get_server_software}</p>
+							<p>{{ $Lang->str('PHP 版本：'); }}{System:get_PHP_Version}</p>
+							<p>{{ $Lang->str('PHP 运行方式：'); }}{System:get_php_sapi_name}</p>
+							<p>{{ $Lang->str('服务器操作系统：'); }}{System:get_php_os}</p>
+							<p>{{ $Lang->str('HTTP 服务器：'); }}{System:get_server_software}</p>
                         </div>
 					</div>
                 </div>

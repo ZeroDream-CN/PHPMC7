@@ -24,6 +24,7 @@ class User {
 	public function Login($username, $password) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`users` WHERE `username`='{$username}'"));
 		if($rs) {
 			return password_verify(md5($password), $rs['password']);
@@ -35,6 +36,7 @@ class User {
 	public function getCounts() {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`users`");
 		$i = 0;
 		while($rw = mysqli_fetch_row($rs)) {
@@ -51,6 +53,7 @@ class User {
 	public function getOptionList($isModifyList = false) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`users`");
 		$data = "";
 		while($rw = mysqli_fetch_row($rs)) {
@@ -71,6 +74,7 @@ class User {
 	public function getUserListAdmin() {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`users`");
 		$data = "";
 		while($rw = mysqli_fetch_row($rs)) {
@@ -96,6 +100,7 @@ class User {
 		$uuid = md5(md5(time() . rand(0, 999999)));
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		mysqli_query($conn, "INSERT INTO `{$db['name']}`.`users` (`id`, `username`, `password`, `email`, `permission`) "
 			. "VALUES (NULL, '{$username}', '{$password}', '{$email}', '{$permission}')");
 		return true;
@@ -114,6 +119,7 @@ class User {
 	public function updateUser($id, $username, $password = false, $email, $permission) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		if($password) {
 			mysqli_query($conn, "UPDATE `{$db['name']}`.`users` SET `username`='{$username}', `password`='{$password}', " 
 				. "`email`='{$email}', `permission`='{$permission}' WHERE `id`='{$id}'");
@@ -133,6 +139,7 @@ class User {
 	public function deleteUser($id) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		mysqli_query($conn, "DELETE FROM `{$db['name']}`.`users` WHERE `id`='{$id}'");
 		return true;
 	}

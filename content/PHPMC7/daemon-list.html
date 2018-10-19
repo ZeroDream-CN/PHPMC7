@@ -33,7 +33,7 @@
 				<div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Daemon 列表</h5>
+                            <h5>{{ $Lang->str('Daemon 列表'); }}</h5>
 						</div>
                         <div class="ibox-content" style="">
 							{{ PHPMC::Daemon()->getDaemonListAdmin() }}
@@ -43,27 +43,27 @@
                 <div class="col-lg-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>修改 Daemon</h5></div>
+                            <h5>{{ $Lang->str('修改 Daemon'); }}</h5></div>
                         <div class="ibox-content addfrp">
-                            <p>从上面选择一个 Daemon 来修改设置</p>
+                            <p>{{ $Lang->str('从上面选择一个 Daemon 来修改设置'); }}</p>
 							<div id="changedaemon" style="display: none;">
-								<p>请注意，当 Daemon 中还有服务器时无法删除。</p>
-								<p>Daemon 名称</p>
+								<p>{{ $Lang->str('请注意，当 Daemon 中还有服务器时无法删除。'); }}</p>
+								<p>{{ $Lang->str('Daemon 名称'); }}</p>
 								<input type="text" id="modify_name" class="form-control" />
-								<p>AJAX 请求地址</p>
+								<p>{{ $Lang->str('AJAX 请求地址'); }}</p>
 								<input type="text" id="modify_host" class="form-control" />
-								<p>连接密码</p>
+								<p>{{ $Lang->str('连接密码'); }}</p>
 								<input type="text" id="modify_pass" class="form-control" />
-								<p>域名或 IP 地址</p>
+								<p>{{ $Lang->str('域名或 IP 地址'); }}</p>
 								<input type="text" id="modify_fqdn" class="form-control" />
-								<p>服务器系统类型</p>
+								<p>{{ $Lang->str('服务器系统类型'); }}</p>
 								<select id="modify_type" class="form-control">
 									<option value="linux" id="Type_linux">Linux x86/x64</option>
 									<option value="windows" id="Type_windows">Windows x86/x64</option>
 								</select>
 								<div class="text-right" style="margin-top: 16px;">
-									<button class="btn btn-danger" onclick="deleteDaemon()">删除 Daemon</button>
-									<button class="btn btn-primary" onclick="updateDaemon()">保存修改</button>
+									<button class="btn btn-danger" onclick="deleteDaemon()">{{ $Lang->str('删除 Daemon'); }}</button>
+									<button class="btn btn-primary" onclick="updateDaemon()">{{ $Lang->str('保存修改'); }}</button>
 								</div>
 							</div>
 						</div>
@@ -72,24 +72,24 @@
 				<div class="col-lg-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>添加服务器</h5>
+                            <h5>{{ $Lang->str('添加 Daemon'); }}</h5>
 						</div>
                         <div class="ibox-content addfrp">
-							<p>Daemon 名称</p>
+							<p>{{ $Lang->str('Daemon 名称'); }}</p>
 							<input type="text" id="name" class="form-control" />
-							<p>AJAX 请求地址</p>
+							<p>{{ $Lang->str('AJAX 请求地址'); }}</p>
 							<input type="text" id="host" class="form-control" />
-							<p>连接密码</p>
+							<p>{{ $Lang->str('连接密码'); }}</p>
 							<input type="text" id="pass" class="form-control" />
-							<p>域名或 IP 地址</p>
+							<p>{{ $Lang->str('域名或 IP 地址'); }}</p>
 							<input type="text" id="fqdn" class="form-control" />
-							<p>服务器系统类型</p>
+							<p>{{ $Lang->str('服务器系统类型'); }}</p>
 							<select id="type" class="form-control">
 								<option value="linux">Linux x86/x64</option>
 								<option value="windows">Windows x86/x64</option>
 							</select>
 							<div class="text-right" style="margin-top: 16px;">
-								<button class="btn btn-primary" onclick="createDaemon()">添加 Daemon</button>
+								<button class="btn btn-primary" onclick="createDaemon()">{{ $Lang->str('添加 Daemon'); }}</button>
 							</div>
 						</div>
                     </div>
@@ -99,7 +99,7 @@
 		<script type="text/javascript">
 			var selected;
 			function selectDaemon(id, element) {
-				window.parent.frames.progressshow("请稍后，正在加载...");
+				window.parent.frames.progressshow("{{ $Lang->str('请稍后，正在加载...'); }}");
 				$(".server-hover").attr("style", "");
 				element.style.border = "1px solid rgba(255,255,255,0.3)";
 				var htmlobj = $.ajax({
@@ -173,7 +173,7 @@
 				});
 			}
 			function deleteDaemon() {
-				if(confirm("您确定要删除此 Daemon 吗？此操作不可恢复！")) {
+				if(confirm("{{ $Lang->str('您确定要删除此 Daemon 吗？此操作不可恢复！'); }}")) {
 					var htmlobj = $.ajax({
 						url: "?action=deletedaemon",
 						async:true,

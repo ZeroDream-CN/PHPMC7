@@ -124,10 +124,12 @@ function selectServer(id, element) {
 
 function serverStatus() {
 	var htmlobjs = $.ajax({url:"?action=status&id=" + server, async:true, timeout:10000, success: function(){
-		var rpt = htmlobjs.responseText;
-		var fallback = rpt.split("\/");
-		$("#online").html(fallback[0]);
-		$("#max").html(fallback[1]);
+		if(server != undefined) {
+			var rpt = htmlobjs.responseText;
+			var fallback = rpt.split("\/");
+			$("#online").html(fallback[0]);
+			$("#max").html(fallback[1]);
+		}
 		setTimeout(serverStatus, 10000);
 	}});
 };

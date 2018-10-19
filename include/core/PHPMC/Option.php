@@ -6,6 +6,7 @@ class Option {
 	public function __construct() {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`option`");
 		while($rw = mysqli_fetch_row($rs)) {
 			$this->options[$rw[1]] = $rw[2];
@@ -22,18 +23,21 @@ class Option {
 		}
 	}
 	
-	public function saveConfig($SiteName, $Description, $Theme) {
+	public function saveConfig($SiteName, $Description, $Theme, $Lang) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		mysqli_query($conn, "UPDATE `{$db['name']}`.`option` SET `value`='{$SiteName}' WHERE `key`='SiteName'");
 		mysqli_query($conn, "UPDATE `{$db['name']}`.`option` SET `value`='{$Description}' WHERE `key`='Description'");
 		mysqli_query($conn, "UPDATE `{$db['name']}`.`option` SET `value`='{$Theme}' WHERE `key`='Theme'");
+		mysqli_query($conn, "UPDATE `{$db['name']}`.`option` SET `value`='{$Lang}' WHERE `key`='Lang'");
 		return true;
 	}
 	
 	public function updateOption($key, $value) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		mysqli_query($conn, "UPDATE `{$db['name']}`.`option` SET `value`='{$value}' WHERE `key`='{$key}'");
 		return true;
 	}

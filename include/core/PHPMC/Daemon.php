@@ -20,6 +20,7 @@ class Daemon {
 			$this->daemon = $daemon;
 			$db = Config::MySQL();
 			$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+			mysqli_query($conn, "set names 'utf8mb4'");
 			$rs = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`daemon` WHERE `id`='{$daemon}'"));
 			if($rs) {
 				$this->id = $rs['id'];
@@ -59,6 +60,7 @@ class Daemon {
 	public function getCounts() {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`daemon`");
 		$i = 0;
 		while($rw = mysqli_fetch_row($rs)) {
@@ -75,6 +77,7 @@ class Daemon {
 	public function getOptionList() {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`daemon`");
 		$data = "";
 		while($rw = mysqli_fetch_row($rs)) {
@@ -97,6 +100,7 @@ class Daemon {
 		$uuid = md5(md5(time() . rand(0, 999999)));
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		mysqli_query($conn, "INSERT INTO `{$db['name']}`.`daemon` (`id`, `name`, `host`, `pass`, `fqdn`, `type`) "
 			. "VALUES (NULL, '{$name}', '{$host}', '{$pass}', '{$fqdn}', '{$type}')");
 		return true;
@@ -116,6 +120,7 @@ class Daemon {
 	public function updateDaemon($id, $name, $host, $pass, $fqdn, $type) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		mysqli_query($conn, "UPDATE `{$db['name']}`.`daemon` SET `name`='{$name}', `host`='{$host}', " 
 			. "`pass`='{$pass}', `fqdn`='{$fqdn}', `type`='{$type}' WHERE `id`='{$id}'");
 		return true;
@@ -130,6 +135,7 @@ class Daemon {
 	public function deleteDaemon($id) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		mysqli_query($conn, "DELETE FROM `{$db['name']}`.`daemon` WHERE `id`='{$id}'");
 		return true;
 	}
@@ -142,6 +148,7 @@ class Daemon {
 	public function getDaemonListAdmin() {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`daemon`");
 		$data = "";
 		while($rw = mysqli_fetch_row($rs)) {

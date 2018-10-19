@@ -40,8 +40,9 @@ class Permission {
 	
 	public function checkSession($permission) {
 		if(!$this->check($permission)) {
+			$Option = new Option();
 			$Loader = new Loader();
-			echo $Loader->loadPage("403.html", ROOT . "/content/" . Config::Theme() . "/error/");
+			echo $this->check($permission);//$Loader->loadPage("403.html", ROOT . "/content/" . $Option->getOption("Theme") . "/error/");
 			exit;
 		}
 	}
@@ -57,10 +58,24 @@ class Permission {
 	 */
 	public function serverControlPerm($permission, $server) {
 		$gettag = explode(";", $permission);
-		for($i = 0;$i < count($gettag);$i++) {
-			$getkey = explode(":", $gettag[$i]);
-			if($getkey[0] == "server" && $getkey[1] == $server) {
-				return true;
+		$s = 0;
+		$User = new User();
+		$Profile = $User->getLoginUser();
+		$Server = new Server();
+		$Server->setServer($server);
+		if($Server->uuid == null) {
+			return false;
+		}
+		if($Server->owner == $Profile->id) {
+			return true;
+		} else {
+			for($i = 0;$i < count($gettag);$i++) {
+				$getkey = explode(":", $gettag[$i]);
+				if($getkey[0] == "server") {
+					if($getkey[1] == $server) {
+						return true;
+					}
+				}
 			}
 		}
 		return false;

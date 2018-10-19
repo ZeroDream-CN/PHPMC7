@@ -273,7 +273,7 @@ class Event {
 			echo $sinfo['online'] . "/" . $sinfo['max'] . "/" . $Daemon->fqdn . ":" . $Server->port;
 			exit;
 		} else {
-			echo "/";
+			echo "0/0/0";
 			exit;
 		}
 	}
@@ -540,7 +540,10 @@ class Event {
 		if(!preg_match("/^[a-zA-Z0-9\-\_]+$/", $data['Theme'])) {
 			PHPMC::Error()->Println("请填写字段：系统主题");
 		}
-		PHPMC::Option()->saveConfig($data['SiteName'], $data['Description'], $data['Theme']);
+		if(!preg_match("/^[a-zA-Z0-9\-\_]+$/", $data['Lang'])) {
+			PHPMC::Error()->Println("请填写字段：系统语言");
+		}
+		PHPMC::Option()->saveConfig($data['SiteName'], $data['Description'], $data['Theme'], $data['Lang']);
 		echo "系统设置更改成功，您需要刷新网页后设置才会生效。";
 		exit;
 	}

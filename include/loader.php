@@ -1,11 +1,20 @@
 <?php
 include(ROOT . "/include/core/PHPMC/Main.php");
 include(ROOT . "/include/data/config.php");
+
+// 想来想去还是在这里加载语言设置比较合适
+$Lang = new Lang();
+$Option = new Option();
+$result = $Option->getOption("Lang");
+$result = $result == "" ? "zh-CN" : $result;
+$Lang->setLang($result);
+
 class Loader {
 	
 	public $Event;
 	
 	public function __construct() {
+		global $Lang;
 		$this->Event = new Event();
 	}
 	
@@ -15,6 +24,7 @@ class Loader {
 	 *
 	 **/
 	public function frame() {
+		global $Lang;
 		echo $this->loadPage("panel.html", ROOT . "/content/" . Config::Theme() . "/");
 	}
 	
@@ -28,6 +38,7 @@ class Loader {
 	 *
 	 **/
 	public function loadPage($pageName, $pagePath) {
+		global $Lang;
 		SESSION_START();
 		$Option = new Option();
 		$Profile = new Profile($_SESSION["user"]);
@@ -83,6 +94,7 @@ class Loader {
 	 *
 	 **/
 	public function router() {
+		global $Lang;
 		if(PHPMC::Csrf()->isemptyCsrfToken()) {
 			PHPMC::Csrf()->createCsrfToken();
 		}

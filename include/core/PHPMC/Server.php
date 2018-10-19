@@ -25,6 +25,7 @@ class Server {
 		$this->server = $server;
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		// Method 1 通过服务器 ID 查找服务器
 		$rs = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`servers` WHERE `id`='" . $this->server . "'"));
 		if($rs) {
@@ -161,6 +162,7 @@ class Server {
 		$uuid = md5(uniqid(rand(0, 10000000), TRUE));
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		mysqli_query($conn, "INSERT INTO `{$db['name']}`.`servers` (`id`, `name`, `daemon`, `maxram`, `jar`, `startcommand`, `stopcommand`, `owner`, `status`, `port`, `uuid`, `ftppass`) "
 			. "VALUES (NULL, '{$name}', '{$daemon}', '{$maxram}', '{$jar}', '{$startcommand}', '{$stopcommand}', '{$owner}', '{$status}', '{$port}', '{$uuid}', '{$ftppass}')");
 		$this->setServer($uuid);
@@ -186,6 +188,7 @@ class Server {
 	public function updateServer($id, $name, $maxram, $jar, $startcommand, $stopcommand, $owner, $status, $port, $ftppass) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		mysqli_query($conn, "UPDATE `{$db['name']}`.`servers` SET `name`='{$name}', `maxram`='{$maxram}', `jar`='{$jar}', `startcommand`='{$startcommand}', "
 			."`stopcommand`='{$stopcommand}', `owner`='{$owner}', `status`='{$status}', `port`='{$port}', `ftppass`='{$ftppass}' WHERE `id`='{$id}'");
 		return true;
@@ -201,6 +204,7 @@ class Server {
 		$this->setServer($id);
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$Daemon = new Daemon();
 		if($Daemon->setDaemon($this->daemon) == null) {
 			return false;
@@ -329,6 +333,7 @@ class Server {
 	public function getCounts() {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`servers`");
 		$i = 0;
 		while($rw = mysqli_fetch_row($rs)) {
@@ -346,6 +351,7 @@ class Server {
 	public function getCountsByDaemon($id) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`servers` WHERE `daemon`='{$id}'");
 		$i = 0;
 		while($rw = mysqli_fetch_row($rs)) {
@@ -363,6 +369,7 @@ class Server {
 	public function getCountsByOwner($id) {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`servers` WHERE `owner`='{$id}'");
 		$i = 0;
 		while($rw = mysqli_fetch_row($rs)) {
@@ -380,13 +387,14 @@ class Server {
 	public function getServerList() {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$User = new User();
 		$Profile = $User->getLoginUser();
 		$ownerid = $Profile->id;
 		$rs = mysqli_query($conn, "SELECT * FROM `{$db['name']}`.`servers`");
 		$data = "";
 		while($rw = mysqli_fetch_row($rs)) {
-			if(PHPMC::Permission()->check("server:" . $rw[0])) {
+			if(PHPMC::Permission()->check("server:" . $rw[0]) || $rw[7] == $ownerid) {
 				$Daemon = new Daemon();
 				if($Daemon->setDaemon($rw[2]) == null) {
 					PHPMC::Error()->Println("500 Server Internal Error");
@@ -409,6 +417,7 @@ class Server {
 	public function getServerListAdmin() {
 		$db = Config::MySQL();
 		$conn = mysqli_connect($db['host'], $db['user'], $db['pass'], $db['name'], $db['port']);
+		mysqli_query($conn, "set names 'utf8mb4'");
 		$User = new User();
 		$Profile = $User->getLoginUser();
 		$ownerid = $Profile->id;
@@ -421,7 +430,7 @@ class Server {
 			}
 			$Profile = new Profile($rw[7]);
 			$data .= "<div class='server-hover' onclick='selectServer({$rw[0]}, this)'>
-				<h5>{$rw[1]}</h5>
+				<h5>ID：{$rw[0]} 名称：{$rw[1]}</h5>
 				<p>" . $Daemon->fqdn . ":{$rw[9]} | 所有者：" . $Profile->username . "</p>
 			</div>";
 		}
