@@ -41,3 +41,5 @@ PHPMC 7 目前已支持多语言，您可以在 PHPMC 7 设置中切换系统语
 PHPMC 7 now support multi-language, you can change the system language in setting such as `en_US`.
 
 俄罗斯语：https://github.com/maxim19116/PHPMC7 由 @maxim19116 翻译。
+
+更多语言 More：https://github.com/kasuganosoras/PHPMC7-Multi-Language
