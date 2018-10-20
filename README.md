@@ -42,7 +42,7 @@ The demo is only for how the system work and layout demonstration.
 Demo does not frequently update to latest version. Please install the latest PHPMC to try out all features.
 
 ### Multiple languages
-you can switch system languages from `en_US`, `zh_CN` and more languages in PHPMC 7 settings.
+PHPMC 7 now supports multiple languages, and you can switch system languages from `en_US`, `zh_CN` and more languages in PHPMC 7 settings.
 
 More languages: https://github.com/kasuganosoras/PHPMC7-Multi-Language
 
