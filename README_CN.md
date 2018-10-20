@@ -34,10 +34,10 @@ PHPMC 7 不使用 MD5 这种过时的密码储存方式，我们使用更高安�
 PHPMC 7 支持权限细分，几乎任何操作都可以设置独立权限。
 
 ### 在线演示 Demo
-* 简体中文: https://demo.phpmc.cn/?lang=zh_CN
-* 繁體中文: https://demo.phpmc.cn/?lang=zh_TW
-* English: https://demo.phpmc.cn/?lang=en_US
-* Russian: https://demo.phpmc.cn/?lang=ru_RU
+* 简体中文: [https://demo.phpmc.cn/?lang=zh_CN](https://demo.phpmc.cn/?lang=zh_CN)
+* 繁體中文: [https://demo.phpmc.cn/?lang=zh_TW](https://demo.phpmc.cn/?lang=zh_TW)
+* English: [https://demo.phpmc.cn/?lang=en_US](https://demo.phpmc.cn/?lang=en_US)
+* Russian: [https://demo.phpmc.cn/?lang=ru_RU](https://demo.phpmc.cn/?lang=ru_RU)
 
 演示服务器用户名和密码均为：`admin`
 
