@@ -3,6 +3,8 @@ Open source | Multi-Platform | Distributed | FTP support | BungeeCord Support
 
 Are you still looking for a simple and convenient Minecraft Server Manager? PHPMC 7 may be your best choice!
 
+中文介绍 ReadMe：[[README_CN.md]](https://github.com/kasuganosoras/PHPMC7/blob/master/README_CN.md)
+
 > PHPMC 7 is a Powerful Minecraft Server Manager, Developed by Akkariin
 
 ### Introduction
