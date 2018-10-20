@@ -1,45 +1,49 @@
-# PHPMC-7
-开源 | 跨平台 | 分布式 | 内置 FTP | 支持群组 | 支持 Docker
+# <img src="https://i.natfrp.org/3d939a311fe6bf031f25c4eeefda9c39.png" align="right" style="width: 256px">PHPMC-7
+Open source | Multi-Platform | Distributed | FTP support | BungeeCord Support | Docker Support
 
-欢迎使用 PHPMC 7，这是一款 Minecraft 服务器管理系统，由 Akkariin 开发。
+Are you still looking for a simple and convenient Minecraft Server Manager? PHPMC 7 may be your best choice!
 
-![PHPMC7-Logo](https://i.natfrp.org/90652ab275ce942c71f00eb250104225.png)
+> PHPMC 7 is a Powerful Minecraft Server Manager, Developed by Akkariin
 
-### 简介
-嗨，我是超级鸽子王Akkariin，这次我给大家带来的是我很久没更新（对的，非常久）的 PHPMC 系列软件。
+### Introduction
+Hello, I am Akkariin, this is my first Minecraft server manager project.
 
-之前的 PHPMC 3 由于开源协议问题被删帖，不过这次不用担心。
+I wanted to develop a Minecraft server manager long ago, so I recently spent some time developing the PHPMC 7 project.
 
-之所以一下跨这么大个版本呢...主要是因为时间太长了。
+Sorry for my poor English, I used Google Translate to write this ReadMe, so there may be some grammatical mistakes.
 
-最新的 PHPMC 7 拥有很多强大的功能，具体有哪些亮点呢？我们一起往下看。
+### The main function
+> 1. Complete Minecraft server management capabilities
+> 2. Support cross-platform, it can run on Windows and Linux, even Android phones
+> 3. Support for multiple nodes and distributed
+> 4. Has FTP file transfer function
+> 5. Support for Docker containers (starting containers by command invocation)
+> 6. Can run game servers other than Minecraft
 
-### 主要功能
-> 1. 完整的 Minecraft 服务器管理功能
-> 2. 支持跨平台，Windows 和 Linux 都能运行，甚至可以运行在手机上
-> 3. 支持多节点，轻松实现分布式
-> 4. 内置 FTP 文件传输功能
-> 5. 支持 Docker 容器（通过命令调用方式启动容器）
-> 6. 可以运行除了 Minecraft 以外的其他游戏服务器
+### Security
+PHPMC 7 does not use MD5, we use secure hashes like BCrypt
 
-### 安全性
-经过两年多的时间，PHPMC 7 已经非常安全和稳定了，PHPMC 7 不再使用 MD5，而是改为使用 BCrypt。
+We use the Java Daemon to read output through the IO stream, which is more efficient.
 
-PHPMC 7 抛弃了以往的 PHP Daemon 和 Rcon 这种低效率的命令执行方式，改为 Java Daemon 和标准输入输出。
+Because any command can be executed through the panel, it is recommended that you do not use it for commercial rental, otherwise there may be a security risk.
 
-理论上面板可以执行任何命令行，所以建议您不要用于商业出租，或者使用 Docker 容器并拒绝普通用户设置启动命令参数。
+PHPMC 7 supports permission subdivision, and permissions can be set for each operation.
 
-PHPMC 7 支持权限细分，每个操作都可以设定权限。
+### Online Demo
+Demo site: https://demo.phpmc.cn/
 
-。。。懒得写了。。Markdown真麻烦。。。
+The username and password is: `admin`
 
-看这里吧：http://www.mcbbs.net/thread-819800-1-1.html
+This Demo is for viewing only, with no actual functionality.
 
-### 多语言 Multi-language
-PHPMC 7 目前已支持多语言，您可以在 PHPMC 7 设置中切换系统语言，例如 `en_US`。
+Demo is not the latest version, if you want to experience the full features, please download and install.
 
-PHPMC 7 now support multi-language, you can change the system language in setting such as `en_US`.
+### Multiple languages
+PHPMC 7 now supports multiple languages, and you can switch system languages such as `en_US` and `zh_CN` in PHPMC 7 settings.
 
-俄罗斯语：https://github.com/maxim19116/PHPMC7 由 @maxim19116 翻译。
+More languages pack on: https://github.com/kasuganosoras/PHPMC7-Multi-Language
 
-更多语言 More：https://github.com/kasuganosoras/PHPMC7-Multi-Language
+### Licences
+This project uses the GNU General Public License v3.0 open source.
+
+You may use, modify and distribute it arbitrarily, subject to the agreement.
