@@ -1,7 +1,9 @@
 # <img src="https://i.natfrp.org/3d939a311fe6bf031f25c4eeefda9c39.png" align="right" style="width: 256px">PHPMC-7
 开源 | 跨平台 | 分布式 | FTP 支持 | BungeeCord 支持
 
-您还在寻找方便实用的 Minecraft 服务器管理器吗？PHPMC 7 可能是您最好的选择！
+您还在四处寻找方便实用的 Minecraft 服务器管理器吗？
+
+PHPMC 7 可能是您最好的选择！
 
 > PHPMC 7 是一个功能强大的 Minecraft 服务器管理面板，由 Akkariin 开发。
 
