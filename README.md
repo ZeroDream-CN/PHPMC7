@@ -1,5 +1,5 @@
 # <img src="https://i.natfrp.org/3d939a311fe6bf031f25c4eeefda9c39.png" align="right" style="width: 256px">PHPMC-7
-Open source | Multi-Platform | Distributed | FTP support | BungeeCord Support | Docker Support
+Open source | Multi-Platform | Distributed | FTP support | BungeeCord Support
 
 Are you still looking for a simple and convenient Minecraft Server Manager? PHPMC 7 may be your best choice!
 
