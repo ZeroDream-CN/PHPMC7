@@ -14,7 +14,7 @@ Gayhub 基佬猫（雾）》
 
 我很早就想开发这个管理器了，所以我找了个时间写出了这个 PHPMC 7 项目。
 
-英文 README 一堆语法错误不要介意……
+之前的 ReadMe 是自己瞎写的英文丢人死了（手动丢人.jpg）请不要去翻 commit 记录来吐槽了 orz  ![img](https://i.natfrp.org/fd244bf473b27590239d76c68c3a65dd.png)
 
 ### 主要有什么功能呢？
 > 1. 完整的 Minecraft 服务器管理功能
