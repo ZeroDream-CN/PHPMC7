@@ -27,7 +27,7 @@ We uses JAVA I/O Stream to send commands and read & write logs, it makes the str
 
 PHPMC supports Docker to run servers, but it is not recommanded to use PHPMC 7 as commercial purposes.
 
-PHPMC supports privilege subdivision and almost every single operation can be controled by privilege subdivision system.
+PHPMC supports privilege subdivision and almost every single operation can be controlled by privilege subdivision system.
 
 ### Demo
 * 简体中文: [https://demo.phpmc.cn/?lang=zh_CN](https://demo.phpmc.cn/?lang=zh_CN)
@@ -35,7 +35,7 @@ PHPMC supports privilege subdivision and almost every single operation can be co
 * English: [https://demo.phpmc.cn/?lang=en_US](https://demo.phpmc.cn/?lang=en_US)
 * Russian: [https://demo.phpmc.cn/?lang=ru_RU](https://demo.phpmc.cn/?lang=ru_RU)
 
-The Demo userName and passWord are `admin`
+The Demo username and password are `admin`
 
 The demo is only for how the system work and layout demonstration. 
 
