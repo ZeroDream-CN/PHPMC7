@@ -30,7 +30,10 @@ Because any command can be executed through the panel, it is recommended that yo
 PHPMC 7 supports permission subdivision, and permissions can be set for each operation.
 
 ### Online Demo
-Demo site: https://demo.phpmc.cn/
+* 简体中文: https://demo.phpmc.cn/?lang=zh_CN
+* 繁體中文: https://demo.phpmc.cn/?lang=zh_TW
+* English: https://demo.phpmc.cn/?lang=en_US
+* Russian: https://demo.phpmc.cn/?lang=ru_RU
 
 The username and password is: `admin`
 
