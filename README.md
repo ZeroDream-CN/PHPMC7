@@ -1,5 +1,5 @@
 # <img src="https://i.natfrp.org/3d939a311fe6bf031f25c4eeefda9c39.png" align="right" style="width: 256px">PHPMC-7
-Open source | Multi-Platform | Distributed | FTP support | BungeeCord Support
+Open source | Multi-Platform | Multi-nodes | FTP support | BungeeCord Support
 
 Are you still looking for a simple and convenient Minecraft Server Manager? PHPMC 7 may be your best choice!
 
@@ -10,43 +10,41 @@ Are you still looking for a simple and convenient Minecraft Server Manager? PHPM
 ### Introduction
 Hello, I am Akkariin, this is my first Minecraft server manager project.
 
-I wanted to develop a Minecraft server manager long ago, so I recently spent some time developing the PHPMC 7 project.
+I always wanted to build a Minecraft server manager a long ago, so I recently spent some time to develop the fascinating PHPMC 7 Minecraft server management panel.
 
-Sorry for my poor English, I used Google Translate to write this ReadMe, so there may be some grammatical mistakes.
-
-### The main function
+### Features
 > 1. Complete Minecraft server management capabilities
-> 2. Support cross-platform, it can run on Windows and Linux, even Android phones
-> 3. Support for multiple nodes and distributed
-> 4. Has FTP file transfer function
-> 5. Support for Docker containers (starting containers by command invocation)
-> 6. Can run game servers other than Minecraft
+> 2. Runs on multiple platforms, it runs on Windows and Linux, even Android phones
+> 3. Supports multiple nodes and distributed daemons on different servers
+> 4. Supports FTP file transfer system
+> 5. Supports Doker Containers(With some modifications on server starting command)
+> 6. Supports any game that allows you to run your own server.
 
-### Security
-PHPMC 7 does not use MD5, we use secure hashes like BCrypt
+### Security & Performance
+We do not use MD5 hashes because nowadays its possible to be reverse decrypted. We uses irreversible hashes like BCrypt.
 
-We use the Java Daemon to read output through the IO stream, which is more efficient.
+We uses JAVA I/O Stream to send commands and read & write logs, it makes the stream process more stable with higher efficiency.
 
-Because any command can be executed through the panel, it is recommended that you do not use it for commercial rental, otherwise there may be a security risk.
+PHPMC supports Docker to run servers, but it is not recommanded to use PHPMC 7 as commercial purposes.
 
-PHPMC 7 supports permission subdivision, and permissions can be set for each operation.
+PHPMC supports privilege subdivision and almost every single operation can be controled by privilege subdivision system.
 
-### Online Demo
+### Demo
 * 简体中文: [https://demo.phpmc.cn/?lang=zh_CN](https://demo.phpmc.cn/?lang=zh_CN)
 * 繁體中文: [https://demo.phpmc.cn/?lang=zh_TW](https://demo.phpmc.cn/?lang=zh_TW)
 * English: [https://demo.phpmc.cn/?lang=en_US](https://demo.phpmc.cn/?lang=en_US)
 * Russian: [https://demo.phpmc.cn/?lang=ru_RU](https://demo.phpmc.cn/?lang=ru_RU)
 
-The username and password is: `admin`
+The Demo userName and passWord are `admin`
 
-This Demo is for viewing only, with no actual functionality.
+The demo is only for how the system work and layout demonstration. 
 
-Demo is not the latest version, if you want to experience the full features, please download and install.
+Demo does not frequently update to latest version. Please install the latest PHPMC to try out all features.
 
 ### Multiple languages
-PHPMC 7 now supports multiple languages, and you can switch system languages such as `en_US` and `zh_CN` in PHPMC 7 settings.
+you can switch system languages from `en_US`, `zh_CN` and more languages in PHPMC 7 settings.
 
-More languages pack on: https://github.com/kasuganosoras/PHPMC7-Multi-Language
+More languages: https://github.com/kasuganosoras/PHPMC7-Multi-Language
 
 ### Licences
 This project uses the GNU General Public License v3.0 open source.
