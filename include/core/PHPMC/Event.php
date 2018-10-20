@@ -291,7 +291,7 @@ class Event {
 		if(!preg_match("/^[A-Za-z0-9\-\_\.]+$/", $data['jar'])) {
 			PHPMC::Error()->Println("请填写字段：核心文件名字，只能包含英文大小写、数字、_、. 和 -");
 		}
-		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\}\:\/\\\= ]+$/", $data['startcommand'])) {
+		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\}\:\/\\\=\+ ]+$/", $data['startcommand'])) {
 			PHPMC::Error()->Println("请填写字段：核心启动命令");
 		}
 		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\} ]+$/", $data['stopcommand'])) {
@@ -339,8 +339,10 @@ class Event {
 		if(!preg_match("/^[A-Za-z0-9\-\_\.]+$/", $data['jar'])) {
 			PHPMC::Error()->Println("请填写字段：核心文件名字，只能包含英文大小写、数字、_、. 和 -");
 		}
-		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\}\:\/\\\= ]+$/", $data['startcommand'])) {
-			PHPMC::Error()->Println("请填写字段：核心启动命令");
+		// 改为黑名单机制 charBlackList
+		// preg_match("/^[A-Za-z0-9\-\_\.\{\}\:\/\\\=\+ ]+$/", $data['startcommand'])
+		if(!$this->charBlackList($data['startcommand'])) {
+			PHPMC::Error()->Println("请填写字段：核心启动命令: {$data['startcommand']}");
 		}
 		if(!preg_match("/^[A-Za-z0-9\-\_\.\{\} ]+$/", $data['stopcommand'])) {
 			PHPMC::Error()->Println("请填写字段：停止命令");
@@ -373,6 +375,16 @@ class Event {
 			$data['stopcommand'], $data['owner'], "normal", $data['port'], $data['ftppass']);
 		echo "服务器设置更改成功，您需要刷新网页后设置才会生效。";
 		exit;
+	}
+	
+	public function charBlackList($str) {
+		$list = Array("'", ">", "<", "&", "|");
+		foreach($list as $char) {
+			if(mb_stristr($str, $chat)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public function deleteServerEvent($data) {
